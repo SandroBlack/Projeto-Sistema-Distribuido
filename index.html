@@ -18,30 +18,30 @@
 					<form>
 						<h2 class="text-center mb-5 pt-3">LOGIN</h2>
 						<div class="form-group">
-						<label for="exampleInputEmail1">Email</label>
-						<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="E-mail">
+						<label for="loginEmail">Email</label>
+						<input type="email" class="form-control" id="loginEmail" aria-describedby="emailHelp" placeholder="E-mail">
 						<small id="emailHelp" class="form-text text-muted">Nós nunca vamos compartilhar seu e-mail.</small>
 						</div>
 						<div class="form-group">
-						<label for="exampleInputPassword1">Senha</label>
-						<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Senha">
+						<label for="loginSenha">Senha</label>
+						<input type="password" class="form-control" id="loginSenha" placeholder="Senha">
 						</div>
 						<div class="form-check">
-						<input type="checkbox" class="form-check-input" id="exampleCheck1">
-						<label class="form-check-label" for="exampleCheck1">Lembrar</label>
+						<input type="checkbox" class="form-check-input" id="loginCheck">
+						<label class="form-check-label" for="loginCheck">Lembrar</label>
 						</div>								
-						<a href="inicio.html" class="btn btn-primary mt-5 float-right mb-3">Acessar</a>
-						<a class="float-left mt-5" href="" data-toggle="modal" data-target="#exampleModal">Cadastro</a>	
+						<a href="inicio.html" class="btn btn-primary mt-5 float-right mb-3" id="btnAcessar">Acessar</a>
+						<a class="float-left mt-5" href="" id="btnCadastro" data-toggle="modal" data-target="#modalCadastro">Cadastro</a>	
 					</form>					
 				</div>
 			</div>			
 
 			<!-- MODAL DE CADASTRO -->
-			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal fade" id="modalCadastro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel">Cadastro de Usuário</h5>
+							<h5 class="modal-title" id="modalCadastroLabel">Cadastro de Usuário</h5>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
@@ -49,25 +49,25 @@
 						<div class="modal-body">
 							<form>
 								<div class="form-group mt-2">
-										<label for="exampleInputEmail1">Nome</label>                
-									<input type="text" class="form-control" id="exampleInputNome" placeholder="Nome" required>          
+										<label for="modalCadastroNome">Nome</label>                
+									<input type="text" class="form-control" id="modalCadastroNome" placeholder="Nome" required>          
 								</div>
 								<div class="form-group">
-										<label for="exampleInputEmail1">Email</label>                
-									<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="E-mail" required>          
+										<label for="modalCadastroEmail">Email</label>                
+									<input type="email" class="form-control" id="modalCadastroEmail" aria-describedby="emailHelp" placeholder="E-mail" required>          
 								</div>
 								<div class="form-group">
-										<label for="exampleInputEmail1">Senha</label>               
-									<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Senha" required>
+										<label for="modalCadastroSenha">Senha</label>               
+									<input type="password" class="form-control" id="modalCadastroSenha" placeholder="Senha" required>
 								</div>
 								<div class="form-group mb-5">  
-										<label for="exampleInputEmail1">Redigite a Senha</label>             
-									<input type="password" class="form-control" id="exampleInputPassword2" placeholder="Redigite a Senha" required>
+										<label for="modalCadastroReSenha">Redigite a Senha</label>             
+									<input type="password" class="form-control" id="modalCadastroReSenha" placeholder="Redigite a Senha" required>
 								</div>
 						</div>
 						<div class="modal-footer">
 							<!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button> -->
-							<button type="button" class="btn btn-primary">Cadastrar</button>
+							<button type="button" class="btn btn-primary" id="btnModalCadastrar">Cadastrar</button>
 						</div>
 						</form>
 					</div>

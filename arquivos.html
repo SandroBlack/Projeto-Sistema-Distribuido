@@ -13,7 +13,8 @@
     
     <body>
         <div class="container">
-            <div class="row">
+            <!-- TOPO -->
+            <div class="row">                
                 <header class="col-md-12">
                     <nav class="navbar navbar-expand-lg navbar-light bg-dark">
                         <a class="navbar-brand h1 text-light" href="#">Navegação</a>
@@ -42,13 +43,14 @@
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                                 <button class="dropdown-item" type="button">Alterar Senha</button>
-                                <a href="index.html" class="dropdown-item">Sair</a>                            
+                                <a href="index.html" class="dropdown-item" id="btnMenuSair">Sair</a>                            
                             </div>
                         </div>   
                     </nav>                                 
                 </header>                
-            </div> 
+            </div> <!-- FIM TOPO -->
             
+            <!-- BREADCRUMB -->
             <div class="row">            
                 <div class="col-md-12">                       
                     <nav aria-label="breadcrumb">
@@ -60,6 +62,7 @@
                 </div>
             </div> 
 
+            <!-- CONTEÚDO -->
             <div class="row">            
                 <div class="col-md-12">
                    <h3>Arquivos</h3>
@@ -68,10 +71,10 @@
                    <form class="">
                         <div class="form-group">
                             <label for="exampleInputPassword1">Usuário</label>
-                            <input type="search" class="form-control" id="exampleInputUsuario" placeholder="Pesquisar usuário" required>                   
+                            <input type="search" class="form-control" id="pesquisaUsuarioArquivo" placeholder="Pesquisar usuário" required>                   
                         </div>
                         <label for="exampleInputEmail1">Extensão do Arquivo</label>
-                        <select class="form-control mb-3">
+                        <select class="form-control mb-3" id="selectFormato">
                             <option>Selecione</option>
                             <option>DOC</option>
                             <option>PDF</option>
@@ -80,25 +83,25 @@
                         <div class="form-group">
                         <label for="exampleInputTamanho">Tamanho Maxímo do Arquivo</label><br>                       
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="radio1mb" value="1mb">
                             <label class="form-check-label" for="inlineRadio1">1 MB</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="radio3mb" value="3mb">
                             <label class="form-check-label" for="inlineRadio1">3 MB</label>
                         </div>
                         <div class="form-check form-check-inline mb-3">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="radio5mb" value="5mb">
                             <label class="form-check-label" for="inlineRadio1">5 MB</label>
                         </div>
                         <hr>
                         <div>
-                            <button type="submit" class="btn btn-primary mt-3">Requisitar</button>
+                            <button type="submit" class="btn btn-primary mt-3" id="btnRequisitar">Requisitar</button>
                         </div>
                     </div>
                   </form>                   
                 </div>
-            </div>                        
+            </div> <!-- FIM CONTEÚDO -->                       
 
         </div>
 

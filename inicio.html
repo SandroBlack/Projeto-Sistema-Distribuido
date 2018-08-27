@@ -13,6 +13,7 @@
     
     <body>
         <div class="container">
+            <!-- TOPO -->
             <div class="row">
                 <header class="col-md-12">
                     <nav class="navbar navbar-expand-lg navbar-light bg-dark">
@@ -42,13 +43,14 @@
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                                 <button class="dropdown-item" type="button">Alterar Senha</button>
-                                <a href="index.html" class="dropdown-item">Sair</a>                            
+                                <a href="index.html" class="dropdown-item" id="btnMenuSair">Sair</a>                            
                             </div>
                         </div>   
                     </nav>                                 
                 </header>                
-            </div> 
+            </div> <!-- FIM TOPO -->
             
+            <!-- BREADCRUMB -->
             <div class="row">            
                 <div class="col-md-12">                       
                     <nav aria-label="breadcrumb">
@@ -59,6 +61,7 @@
                 </div>
             </div> 
 
+            <!-- CONTEÚDO -->
             <div class="row">            
                 <div class="col-md-12">
                     <h3>Resumo</h3>
@@ -68,7 +71,7 @@
                     <div class="card" style="width: 18rem;">                        
                         <div class="card-body">
                             <h5 class="card-title text-center">Arquivos</h5>
-                            <h1 class="card-text text-center">0</h1>
+                            <h1 class="card-text text-center" id="cardArquivo">0</h1>
                             <a href="arquivos.html" class="btn btn-primary btn-sm align-middle btn-block">Verificar</a>
                         </div>
                     </div>
@@ -77,7 +80,7 @@
                     <div class="card" style="width: 18rem;">                       
                         <div class="card-body">
                             <h5 class="card-title text-center">Mensagens</h5>
-                            <h1 class="card-text text-center">0</h1>
+                            <h1 class="card-text text-center" id="cardMensagem">0</h1>
                             <a href="mensagens.html" class="btn btn-primary btn-sm align-middle btn-block">Verificar</a>
                         </div>
                     </div>
@@ -86,12 +89,12 @@
                     <div class="card" style="width: 18rem;">
                         <div class="card-body">
                             <h5 class="card-title text-center">Pendências</h5>
-                            <h1 class="card-text text-center">0</h1>
+                            <h1 class="card-text text-center" id="cardPendencia">0</h1>
                             <a href="pendencias.html" class="btn btn-primary btn-sm align-middle btn-block">Verificar</a>
                         </div>
                     </div>
                 </div>
-            </div>                        
+            </div> <!-- FIM CONTEÚDO -->                       
 
         </div>
 

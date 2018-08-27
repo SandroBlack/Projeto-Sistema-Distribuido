@@ -13,6 +13,7 @@
     
     <body>
         <div class="container">
+            <!-- TOPO -->
             <div class="row">
                 <header class="col-md-12">
                     <nav class="navbar navbar-expand-lg navbar-light bg-dark">
@@ -42,12 +43,12 @@
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                                 <button class="dropdown-item" type="button">Alterar Senha</button>
-                                <a href="index.html" class="dropdown-item">Sair</a>                            
+                                <a href="index.html" class="dropdown-item" id="btnMenuSair">Sair</a>                            
                             </div>
                         </div>   
                     </nav>                                 
                 </header>                
-            </div> 
+            </div> <!-- FIM TOPO -->
             
             <!-- BREADCRUMB -->
             <div class="row">            
@@ -61,20 +62,19 @@
             </div>   
 
             <!-- CONTEÚDO -->
-            <div class="row">            
+            <div class="row">                            
                 <div class="col-md-12">
                     <h3 class="d-inline">Mensagens</h3>                    
                     <hr>
                 </div>     
             </div>        
             <div class="row">            
-                <!-- <div class="col-md-12"> -->                 
+                                 
                     <div class="col-md-3">
                         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                           <input type="text" class="form-control mb-3" placeholder="Selecionar usuário">
-                          <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Usuário 1</a>
-                          <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Usuário 2</a>
-                          <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Usuário 3</a>                         
+                          <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Usuário X</a>
+
                         </div>
                     </div>
 
@@ -83,23 +83,18 @@
                           <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                             <form>
                                 <div class="form-group">
-                                  <label for="exampleInputEmail1">Mensagem</label>
-                                  <textarea class="form-control" id="exampleInputMensagem2" aria-describedby="mensagem1lHelp" placeholder="Mensagem" rows="15" readonly></textarea>                                  
+                                  <label for="exampleInputMensagem">Mensagem</label>
+                                  <textarea style="resize:none" class="form-control" id="textareaMensagem" aria-describedby="mensagemlHelp" placeholder="Mensagem" rows="15" readonly></textarea>                                  
                                 </div>                                
                                 <div class="form-group">                                    
-                                    <input type="text" class="form-control" id="exampleInputMensagem" aria-describedby="mensagemlHelp" placeholder="Digite uma mensagem">                              
+                                    <input type="text" class="form-control" id="inputMensagem" aria-describedby="mensagemlHelp" placeholder="Digite uma mensagem">                              
                                   </div>
-                                <button type="submit" class="btn btn-primary">Enviar</button>
-                              </form>      
-
-
-                          </div>
-                          <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">22</div>
-                          <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">33</div>                 
+                                <button type="submit" class="btn btn-primary" id="btnEnviarMensagem">Enviar</button>
+                              </form>
+                          </div>                                           
                         </div>
                     </div>
-
-                <!-- </div> -->
+                
             </div> <!-- FIM DO CONTEÚDO --> 
         </div>
 
