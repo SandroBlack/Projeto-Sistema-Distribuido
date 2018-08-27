@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="br">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>E-mail</title>
+    </head>
+    
+    <body>
+        <div class="container">
+            <div class="row">
+                <header class="col-md-12">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+                        <a class="navbar-brand h1 text-light" href="#">Navegação</a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link text-light" href="inicio.html">Inicio<span class="sr-only">(current)</span></a>
+                                </li>                                                                
+                                <li class="nav-item">
+                                    <a class="nav-link text-light" href="arquivos.html">Arquivos<span class="sr-only">(current)</span></a>
+                                </li>                                                                
+                                <li class="nav-item active">
+                                    <a class="nav-link text-light" href="#">E-mail&nbsp;<span class="badge badge-primary">0</span><span class="sr-only">(current)</span></a>
+                                </li>                                                                
+                                <li class="nav-item">
+                                    <a class="nav-link text-light" href="pendencias.html">Pendências&nbsp;<span class="badge badge-primary">0</span><span class="sr-only">(current)</span></a>
+                                </li>                                                                
+                            </ul>
+                        </div>
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Logof
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                <button class="dropdown-item" type="button">Alterar Senha</button>
+                                <a href="index.html" class="dropdown-item">Sair</a>                            
+                            </div>
+                        </div>   
+                    </nav>                                 
+                </header>                
+            </div> 
+            
+            <!-- BREADCRUMB -->
+            <div class="row">            
+                <div class="col-md-12">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="inicio.html">Inicio</a></li>
+                        <li class="breadcrumb-item"><a href="arquivos.html">Arquivos</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">E-mail</li>
+                    </ol>                    
+                </div>
+            </div>   
+
+            <!-- CONTEÚDO -->
+            <div class="row">            
+                <div class="col-md-12">
+                    <h3 class="d-inline">E-mail</h3>
+                    <button class="btn btn-primary float-right mr-3" type="button" data-toggle="modal" data-target="#modalNovoEmail">+ Nova Mensagem</button>
+                    <hr> 
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Caixa de Entrada</a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Enviadas</a>
+                            </li>                            
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">                            
+                            <table class="table table-sm table-hover text-center">
+                                    <thead>
+                                      <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Remetente</th>
+                                        <th scope="col">Assunto</th>
+                                        <th scope="col">Data</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr>
+                                        <th scope="row">1</th>
+                                        <td>Mark</td>
+                                        <td><a href="#">Menssagem 01</a></td>
+                                        <td>22/08/2018</td>
+                                    </tr>
+                                      <tr>
+                                        <th scope="row">2</th>
+                                        <td>Jacob</td>
+                                        <td><a href="#">Menssagem 02</a></td>
+                                        <td>21/08/2018</td>
+                                      </tr>
+                                      <tr>
+                                        <th scope="row">3</th>
+                                        <td>Larry the Bird</td>
+                                        <td><a href="#">Menssagem 03</a></td>
+                                        <td>20/08/2018</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                        </div>
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">                            
+                            <table class="table table-sm table-hover text-center">
+                                <thead>
+                                    <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Para</th>
+                                    <th scope="col">Assunto</th>
+                                    <th scope="col">Data</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Mark</td>
+                                        <td><a href="#">Assunto 1</a></td>
+                                        <td>25/08/2018</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>Jacob</td>
+                                        <td><a href="#">Assunto 2</a></td>
+                                        <td>24/08/2018</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>Larry the Bird</td>
+                                        <td><a href="#">Assunto 03</a></td>
+                                        <td>26/08/2018</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>                       
+                    </div>                    
+                </div>
+            </div> <!-- FIM DO CONTEÚDO --> 
+            
+            <!-- MODAL NOVA MENSAGEM -->
+			<div class="modal fade" id="modalNovoEmail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Nova Mensagem</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                    <form>
+                                            <div class="form-group">
+                                                    <label for="exampleInputPara">Para:</label>                
+                                                <input type="text" class="form-control" id="exampleInputPara" placeholder="Para" required>        
+                                            </div>
+                                            <div class="form-group">
+                                                    <label for="exampleInputAssunto">Assunto:</label>                
+                                                <input type="text" class="form-control" id="exampleInputAssunto" aria-describedby="Assunto" placeholder="Assunto" required></textarea>          
+                                            </div>
+                                            <div class="form-group">
+                                                    <label for="exampleInputTextarea">Mensagem:</label>                
+                                                <textarea class="form-control" id="exampleInputMensagem" aria-describedby="Mensagem" placeholder="Mensagem" rows="7" required></textarea>          
+                                            </div>
+                                        </form>                                        
+                            </div>
+                            <div class="modal-footer">
+                                <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button> -->
+                                <button type="button" class="btn btn-primary">Enviar</button>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div> <!-- FIM MODAL NOVA MENSAGEM -->
+
+        </div>
+
+
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    </body>    
+</html>
