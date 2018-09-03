@@ -38,7 +38,11 @@
 
 			<!-- MODAL DE CADASTRO -->
 			<div class="modal fade" id="modalCadastro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+
 				<div class="modal-dialog" role="document">
+
+
 					<div class="modal-content">
 						<div class="modal-header">
 							<h5 class="modal-title" id="modalCadastroLabel">Cadastro de Usuário</h5>
@@ -46,30 +50,43 @@
 								<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
+
+
+
 						<div class="modal-body">
-							<form>
-								<div class="form-group mt-2">
-										<label for="modalCadastroNome">Nome</label>                
-									<input type="text" class="form-control" id="modalCadastroNome" placeholder="Nome" required>          
-								</div>
-								<div class="form-group">
-										<label for="modalCadastroEmail">Email</label>                
-									<input type="email" class="form-control" id="modalCadastroEmail" aria-describedby="emailHelp" placeholder="E-mail" required>          
-								</div>
-								<div class="form-group">
-										<label for="modalCadastroSenha">Senha</label>               
-									<input type="password" class="form-control" id="modalCadastroSenha" placeholder="Senha" required>
-								</div>
-								<div class="form-group mb-5">  
-										<label for="modalCadastroReSenha">Redigite a Senha</label>             
-									<input type="password" class="form-control" id="modalCadastroReSenha" placeholder="Redigite a Senha" required>
-								</div>
-						</div>
-						<div class="modal-footer">
-							<!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button> -->
-							<button type="button" class="btn btn-primary" id="btnModalCadastrar">Cadastrar</button>
-						</div>
-						</form>
+
+
+						<form action="dadosCadastro.php" method="GET"> <!-- Formulário de Cadastro -->
+
+
+								
+								<label for="modalCadastroNome">Nome</label><br>            
+								<input type="text" class="form-control" name="nomeCadastro" id="modalCadastroNome" placeholder="Nome" required><br>          
+								
+
+
+								
+								<label for="modalCadastroEmail">Email</label> <br>                
+								<input type="email" class="form-control" name="emailCadastro" id="modalCadastroEmail" aria-describedby="emailHelp" placeholder="E-mail" required>  <br>       
+								
+
+
+								
+								<label for="modalCadastroSenha">Senha</label> <br>               
+								<input type="password" class="form-control" name="senhaCadastro" id="modalCadastroSenha" placeholder="Senha" required><br>
+								
+
+								
+								<label for="modalCadastroReSenha">Redigite a Senha</label> <br>             
+								<input type="password" class="form-control" id="modalCadastroReSenha" placeholder="Redigite a Senha" required><br>								
+								
+				
+								<!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button> -->
+								<input type="submit" value="Cadastrar" class="btn btn-primary" id="btnModalCadastrar"><br> 
+								
+						</form><!-- Fim do Formulário de Cadastro -->
+
+
 					</div>
 				</div>
 			</div> <!-- Fim Modal Cadastro -->
