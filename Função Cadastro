@@ -52,6 +52,4 @@ cadastro();
 	 return 0;   
 	
 	}
-header("");
-return 0;
     ?>
