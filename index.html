@@ -8,29 +8,36 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
     <title>Login</title>
 	</head>
 	
-  <body>
+	<body>
 		<div class="container">
 			<div class="row justify-content-center mt-5">
 				<div class="col-md-5 bg-light border">
-					<form>
-						<h2 class="text-center mb-5 pt-3">LOGIN</h2>
-						<div class="form-group">
-						<label for="loginEmail">Email</label>
-						<input type="email" class="form-control" id="loginEmail" aria-describedby="emailHelp" placeholder="E-mail">
-						<small id="emailHelp" class="form-text text-muted">Nós nunca vamos compartilhar seu e-mail.</small>
-						</div>
-						<div class="form-group">
-						<label for="loginSenha">Senha</label>
-						<input type="password" class="form-control" id="loginSenha" placeholder="Senha">
-						</div>
+					<form class="" id="formLogin">
+						<h2 class="text-center text-dark mb-5 pt-3"><i class="fas fa-user-lock"></i>&nbsp;LOGIN</h2>
+						<div class="input-group mb-4">
+							<div class="input-group-prepend">
+							<span class="input-group-text" id="inputGroupPrepend"><i class="fas fa-envelope-square"></i></span>
+							</div>
+							<input type="text" class="form-control" id="" placeholder="E-mail" aria-describedby="inputGroupPrepend" required>
+						</div>	
+						
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+							<span class="input-group-text" id="inputGroupPrepend"><i class="fas fa-key"></i></span>
+							</div>
+							<input type="text" class="form-control" id="" placeholder="Senha" aria-describedby="inputGroupPrepend" required> 
+						</div>	
 						<div class="form-check">
-						<input type="checkbox" class="form-check-input" id="loginCheck">
-						<label class="form-check-label" for="loginCheck">Lembrar</label>
-						</div>								
-						<a href="inicio.html" class="btn btn-primary mt-5 float-right mb-3" id="btnAcessar">Acessar</a>
+							<input type="checkbox" class="form-check-input" id="loginCheck">
+							<label class="form-check-label" for="loginCheck">Lembrar</label>
+						</div>			
+						<button type="button" class="btn btn-primary mt-5 float-right mb-3" id="btnLogin"><i class="fas fa-sign-in-alt"></i>&nbsp;Acessar</button>
 						<a class="float-left mt-5" href="" id="btnCadastro" data-toggle="modal" data-target="#modalCadastro">Cadastro</a>	
 					</form>					
 				</div>
@@ -38,67 +45,42 @@
 
 			<!-- MODAL DE CADASTRO -->
 			<div class="modal fade" id="modalCadastro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-
-
 				<div class="modal-dialog" role="document">
-
-
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="modalCadastroLabel">Cadastro de Usuário</h5>
+							<h5 class="modal-title" id="modalCadastroLabel"><i class="fas fa-user-circle fa-1x"></i>&nbsp;Cadastro de Usuário</h5>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
 
-
-
 						<div class="modal-body">
-
-
-						<form action="dadosCadastro.php" method="GET"> <!-- Formulário de Cadastro -->
-
-
-								
+							<form class="" id="formCadastro"> 
 								<label for="modalCadastroNome">Nome</label><br>            
 								<input type="text" class="form-control" name="nomeCadastro" id="modalCadastroNome" placeholder="Nome" required><br>          
-								
-
-
-								
 								<label for="modalCadastroEmail">Email</label> <br>                
 								<input type="email" class="form-control" name="emailCadastro" id="modalCadastroEmail" aria-describedby="emailHelp" placeholder="E-mail" required>  <br>       
-								
-
-
-								
 								<label for="modalCadastroSenha">Senha</label> <br>               
-								<input type="password" class="form-control" name="senhaCadastro" id="modalCadastroSenha" placeholder="Senha" required><br>
-								
-
-								
+								<input type="password" class="form-control" name="senhaCadastro" id="modalCadastroSenha" placeholder="Senha" required><br>								
 								<label for="modalCadastroReSenha">Redigite a Senha</label> <br>             
-								<input type="password" class="form-control" id="modalCadastroReSenha" placeholder="Redigite a Senha" required><br>								
-								
-				
+								<input type="password" class="form-control" id="modalCadastroReSenha" placeholder="Redigite a Senha" required><br>				
 								<!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button> -->
-								<input type="submit" value="Cadastrar" class="btn btn-primary" id="btnModalCadastrar"><br> 
-								
-						</form><!-- Fim do Formulário de Cadastro -->
-
+								<button type="button" value="" class="btn btn-primary" id="btnModalCadastrar"><i class="fas fa-save"></i>&nbsp;Cadastrar</button><br>						
+							</form>
+						</div>
 
 					</div>
 				</div>
-			</div> <!-- Fim Modal Cadastro -->
-
-		</div>
+			</div>	
+		</div><!-- Fim Modal Cadastro -->
 	
 	
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  </body>
+		<!-- Optional JavaScript -->
+		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+		<script src="js/funcoes.js"></script>
+	</body>
 </html>
