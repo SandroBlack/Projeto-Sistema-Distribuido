@@ -16,6 +16,7 @@
     
     <body>
         <div class="container">
+            <!-- TOPO -->
             <div class="row">
                 <header class="col-md-12">
                     <nav class="navbar navbar-expand-lg navbar-light bg-dark">
@@ -32,7 +33,7 @@
                                     <a class="nav-link text-light" href="arquivos.html"><i class="fas fa-file-alt"></i>&nbsp;Arquivos<span class="sr-only">(current)</span></a>
                                 </li>                                                                
                                 <li class="nav-item active">
-                                    <a class="nav-link text-light" href="#"><i class="fas fa-envelope-square"></i>&nbsp;E-mail&nbsp;<span class="badge badge-primary">0</span><span class="sr-only">(current)</span></a>
+                                    <a class="nav-link text-light" href="email.html"><i class="fas fa-envelope-square"></i>&nbsp;E-mail&nbsp;<span class="badge badge-primary contEmail">0</span><span class="sr-only">(current)</span></a>
                                 </li>                                                                
                                 <li class="nav-item">
                                     <a class="nav-link text-light" href="pendencias.html"><i class="fas fa-exclamation-triangle"></i>&nbsp;Pendências&nbsp;<span class="badge badge-primary">0</span><span class="sr-only">(current)</span></a>
@@ -44,7 +45,7 @@
                             <i class="fas fa-user-circle fa-1x"></i>  
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                <button class="dropdown-item" type="button"><i class="fas fa-key"></i>&nbsp;Alterar Senha</button>
+                                <button type="button" class="dropdown-item" id="btnAltSenha"><i class="fas fa-key"></i>&nbsp;Alterar Senha</button>
                                 <button type="button" class="dropdown-item" id="btnMenuSair"><i class="fas fa-sign-out-alt"></i>&nbsp;Sair</button>                        
                             </div>
                         </div>   
@@ -67,7 +68,7 @@
             <div class="row">            
                 <div class="col-md-12">
                     <h3 class="d-inline text-dark"><i class="fas fa-envelope-square"></i>&nbsp;E-mail</h3>
-                    <button class="btn btn-primary float-right mr-3" type="button" data-toggle="modal" data-target="#modalNovoEmail"><i class="fas fa-plus"></i>&nbsp;Novo E-mail</button>
+                    <button class="btn btn-primary float-right mr-3" type="button" data-toggle="modal" data-target="#modalNovoEmail"><i class="fas fa-edit"></i>&nbsp;Novo</button>
                     <hr> 
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item">
@@ -81,32 +82,32 @@
                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab"> 
                             
                             <!-- Caixa de Entrada -->
-                            <table class="table table-sm table-hover text-center">
+                            <table class="table table-sm table-hover text-center tblEmailEntrada" id="tblCaixaEntrada">
                                 <thead>
                                     <tr class="text-dark bg-light">
-                                        <th scope="col">#</th>
+                                        <th scope="col">Nº</th>
                                         <th scope="col">Remetente</th>
                                         <th scope="col">Assunto</th>
                                         <th scope="col">Data</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th class="text-dark" scope="row">1</th>
+                                    <tr class="text-primary" data-target="#modalLerEmail" data-toggle="modal" style="cursor:pointer" id="XXX">
+                                        <th scope="row">1</th>
                                         <td>Mark</td>
-                                        <td><a href="#">Menssagem 01</a></td>
+                                        <td>Assunto Recebido 01</td>
                                         <td>22/08/2018</td>
                                     </tr>
-                                    <tr>
-                                        <th class="text-dark" scope="row">2</th>
+                                    <tr class="text-primary" data-target="#modalLerEmail" data-toggle="modal" style="cursor:pointer" id="YYY">
+                                        <th scope="row">2</th>
                                         <td>Jacob</td>
-                                        <td><a href="#">Menssagem 02</a></td>
+                                        <td>Assunto Recebido 02</td>
                                         <td>21/08/2018</td>
                                     </tr>
-                                        <tr>
-                                        <th class="text-dark" scope="row">3</th>
+                                    <tr class="text-primary" data-target="#modalLerEmail" data-toggle="modal" style="cursor:pointer" id="ZZZ">
+                                        <th scope="row">3</th>
                                         <td>Larry the Bird</td>
-                                        <td><a href="#">Menssagem 03</a></td>
+                                        <td>Assunto Recebido 03</td>
                                         <td>20/08/2018</td>
                                     </tr>
                                 </tbody>
@@ -118,29 +119,29 @@
                             <table class="table table-sm table-hover text-center">
                                 <thead>
                                     <tr class="text-dark bg-light">
-                                        <th scope="col">#</th>
+                                        <th scope="col">Nº</th>
                                         <th scope="col">Para</th>
                                         <th scope="col">Assunto</th>
                                         <th scope="col">Data</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    <tr class="text-secondary enviado" data-target="#modalLerEmail" data-toggle="modal" style="cursor:pointer">
                                         <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td><a href="#">Assunto 1</a></td>
+                                        <td>Gambit</td>
+                                        <td>Assunto Enviado 1</td>
                                         <td>25/08/2018</td>
                                     </tr>
-                                    <tr>
+                                    <tr class="text-secondary enviado" data-target="#modalLerEmail" data-toggle="modal" style="cursor:pointer">
                                         <th scope="row">2</th>
-                                        <td>Jacob</td>
-                                        <td><a href="#">Assunto 2</a></td>
+                                        <td>Logan</td>
+                                        <td>Assunto Enviado 2</td>
                                         <td>24/08/2018</td>
                                     </tr>
-                                    <tr>
+                                    <tr class="text-secondary enviado" data-target="#modalLerEmail" data-toggle="modal" style="cursor:pointer">
                                         <th scope="row">3</th>
-                                        <td>Larry the Bird</td>
-                                        <td><a href="#">Assunto 03</a></td>
+                                        <td>Peter Paker</td>
+                                        <td>Assunto Enviado 03</td>
                                         <td>26/08/2018</td>
                                     </tr>
                                 </tbody>
@@ -155,7 +156,7 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Novo E-mail</h5>
+                                <h5 class="modal-title" id="exampleModalLabel"><span class="text-primary"><i class="fas fa-envelope"></i></span>&nbsp;Novo E-mail</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -172,18 +173,57 @@
                                     </div>
                                     <div class="form-group">
                                             <label for="exampleInputTextarea">Mensagem:</label>                
-                                        <textarea class="form-control" id="exampleInputMensagem" aria-describedby="Mensagem" placeholder="Mensagem" rows="7" required></textarea>          
+                                        <textarea class="form-control" id="exampleInputMensagem" style="resize:none" aria-describedby="Mensagem" placeholder="Mensagem" rows="4" required></textarea>          
                                     </div>
                                 </form>                                        
                             </div>
                             <div class="modal-footer">
                                 <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button> -->
-                                <button type="button" class="btn btn-primary"><i class="fas fa-share-square"></i>&nbsp;Enviar</button>
+                                <button type="button" class="btn btn-primary"><i class="fas fa-arrow-circle-right"></i>&nbsp;Enviar</button>
                             </div>
                             
                         </div>
                     </div>
                 </div> <!-- FIM MODAL NOVO E-MAIL -->
+
+                <!-- MODAL LEITURA DE E-MAILS RECEBIDOS -->
+                <div class="modal fade" id="modalLerEmail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title text-primary" id="labelModalLeitura">Assunto...</h5>
+                                <button type="button" class="close" id="fecharModalLeitura" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form class="" id="formEmail">                                    
+                                    <h6 class="text-dark"><span class="text-secondary" id="deModalLeitura"></span></h6>
+                                    <small class="form-text text-muted" id="dataEmail">Data da Mensagem</small>      
+                                    <p class="text-dark"><span class="text-secondary" id="paraModalLeitura"></span></p>                            
+                                    <!-- Área da Messagem -->
+                                    <div class="form-group">
+                                        <!-- <label for="exampleInputTextarea">Mensagem:</label> -->
+                                        <textarea class="form-control bg-light" id="leituraMensagem" style="resize:none" aria-describedby="Mensagem" placeholder="Mensagem" rows="4" readonly></textarea>          
+                                    </div>
+
+                                    <!-- Área da Resposta -->
+                                    <div class="form-group" id="emailResposta" style="display: none">
+                                        <!-- <label for="exampleInputTextarea">Resposta:</label> -->
+                                        <textarea class="form-control" id="leituraMensagem" style="resize:none" aria-describedby="Mensagem" placeholder="Digite a sua Resposta" rows="4"></textarea>          
+                                    </div>
+                                </form>                                        
+                            </div>
+                            
+                            <div class="modal-footer">
+                                <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button> -->
+                                <button type="button" class="btn btn-primary" id="btnResponder"><i class="fas fa-share-square"></i>&nbsp;Responder</button>
+                                <button type="button" class="btn btn-primary" id="btnEnviarResposta" style="display: none"><i class="fas fa-arrow-circle-right"></i>&nbsp;Enviar</button>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div> <!-- FIM MODAL LEITURA DE E-MAILS RECEBIDOS -->
 
         </div>
 
