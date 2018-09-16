@@ -1,12 +1,32 @@
 $(document).ready(function(){
 
-    // Contando quantas linhas tem na tabela
+    // Contando quantas linhas tem na tabela de e-mail
     var qtdLinhas = $('#tblCaixaEntrada tbody tr').length;
     $('.contEmail').html(qtdLinhas);    
 
-    /* PÁGINA DE LOGIN */
+    /* PÁGINA INDEX */
+    // Função de Login
     $('#btnLogin').click(function(){
         location.href='paginas/inicio.html';        
+        var funcao = 'login';
+        var dados = $('#formLogin').serializeArray();               
+        
+        $.ajax({
+            type:'post',
+            url:'../php/funcoes.php',
+            data: {funcao, dados},
+            dataType:'html',
+            success:function(retorno){
+                console.log(retorno);
+            },
+            failure:function(msgErro){
+                console.log(msgErro);
+            },
+            error:function(erro){
+                console.log(erro);
+            }
+        });       
+
     });
 
     /* TOPO DAS PÁGINAS */
@@ -16,10 +36,7 @@ $(document).ready(function(){
 
     /* PÁGINA DE EMAIL */
     $(document).on('click','tbody tr',function(){
-        /*window.location = $(this).data('url');
-        return false;*/       
-        //alert(this.id);        
-
+        
         // Pegando o nome da classe da linha
         var classe = $(this).attr('class');
                
@@ -34,7 +51,7 @@ $(document).ready(function(){
 
        if($(this).hasClass('enviado')){
             // Setando os valores das colunas na modal de leitura
-            $('#labelModalLeitura').html(dados.assunto);           
+            $('#modalLeituraAssunto').html(dados.assunto);           
             $('#deModalLeitura').html('De: Usuário');
             $('#paraModalLeitura').html('Para: ' + dados.nome);
             $('#dataEmail').html(dados.data);
@@ -43,7 +60,7 @@ $(document).ready(function(){
         } else{  
             $('#btnResponder').css('display','block'); 
             // Setando os valores das colunas na modal de leitura
-            $('#labelModalLeitura').html(dados.assunto);
+            $('#modalLeituraAssunto').html(dados.assunto);
             $('#deModalLeitura').html('De: ' + dados.nome);
             $('#paraModalLeitura').html('Para: Usuário');
             $('#dataEmail').html(dados.data);

@@ -165,15 +165,15 @@
                                 <form class="" id="formEmail">
                                     <div class="form-group">
                                             <label for="exampleInputPara">Para:</label>                
-                                        <input type="text" class="form-control" id="exampleInputPara" placeholder="Para" required>        
+                                        <input type="text" class="form-control" name="novoEmailPara" id="novoEmailPara" placeholder="Para" required>        
                                     </div>
                                     <div class="form-group">
                                             <label for="exampleInputAssunto">Assunto:</label>                
-                                        <input type="text" class="form-control" id="exampleInputAssunto" aria-describedby="Assunto" placeholder="Assunto" required></textarea>          
+                                        <input type="text" class="form-control" name="novoEmailAssunto" id="novoEmailAssunto" aria-describedby="Assunto" placeholder="Assunto" required></textarea>          
                                     </div>
                                     <div class="form-group">
                                             <label for="exampleInputTextarea">Mensagem:</label>                
-                                        <textarea class="form-control" id="exampleInputMensagem" style="resize:none" aria-describedby="Mensagem" placeholder="Mensagem" rows="4" required></textarea>          
+                                        <textarea class="form-control" name="novoEmailMensagem" id="novoEmailMensagem" style="resize:none" aria-describedby="Mensagem" placeholder="Mensagem" rows="4" required></textarea>          
                                     </div>
                                 </form>                                        
                             </div>
@@ -191,7 +191,7 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title text-primary" id="labelModalLeitura">Assunto...</h5>
+                                <h5 class="modal-title text-primary" name="modalLeituraAssunto" id="modalLeituraAssunto">Assunto...</h5>
                                 <button type="button" class="close" id="fecharModalLeitura" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -208,9 +208,9 @@
                                     </div>
 
                                     <!-- Área da Resposta -->
-                                    <div class="form-group" id="emailResposta" style="display: none">
+                                    <div class="form-group" name="emailResposta" id="emailResposta" style="display: none">
                                         <!-- <label for="exampleInputTextarea">Resposta:</label> -->
-                                        <textarea class="form-control" id="leituraMensagem" style="resize:none" aria-describedby="Mensagem" placeholder="Digite a sua Resposta" rows="4"></textarea>          
+                                        <textarea class="form-control" name="modalLeituraMensagemResposta" id="modalLeituraMensagemResposta" style="resize:none" aria-describedby="Mensagem" placeholder="Digite a sua Resposta" rows="4"></textarea>          
                                     </div>
                                 </form>                                        
                             </div>
@@ -231,7 +231,7 @@
 
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script src="../js/funcoes.js"></script>
