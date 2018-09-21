@@ -3,7 +3,7 @@ include_once("conexao.php");
 cadastro();
     function cadastro(){ 
 		
-		session_start();
+		
        
 
 		$NOME = $_POST["nome"];
@@ -47,9 +47,5 @@ cadastro();
 		
 			return 0;
 		}
-		 session_destroy();	
- 
-	 return 0;   
-	
-	}
-    ?>
+			
+  	    ?>
