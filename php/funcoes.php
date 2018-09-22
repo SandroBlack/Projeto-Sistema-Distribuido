@@ -16,8 +16,9 @@ switch($funcao){
 
 // Função de Login
 function login(){
-    $email = $_POST["dados"][0]["value"];
-    $senha = $_POST["dados"][1]["value"];
+    $email = $_POST["dados"]."email";   
+    $senha = $_POST["dados"]."senha";
+    
     echo "chegou na função!";    
     
     

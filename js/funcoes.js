@@ -4,17 +4,22 @@ $(document).ready(function(){
     var qtdLinhas = $('#tblCaixaEntrada tbody tr').length;
     $('.contEmail').html(qtdLinhas);    
 
+    /* TOPO DAS PÁGINAS */
+    $('#btnMenuSair').click(function(){
+        location.href='../index.html';
+    });
+
     /* PÁGINA INDEX */
     // Função de Login
     $('#btnLogin').click(function(){
-        location.href='paginas/inicio.html';        
-        var funcao = 'login';
-        var dados = $('#formLogin').serializeArray();               
-        
+        location.href='paginas/inicio.html';          
+        var funcao = 'login';                      
+        var dados = $('#formLogin').serialize();               
+       
         $.ajax({
             type:'post',
             url:'../php/funcoes.php',
-            data: {funcao, dados},
+            data: {funcao,dados},
             dataType:'html',
             success:function(retorno){
                 console.log(retorno);
@@ -29,12 +34,18 @@ $(document).ready(function(){
 
     });
 
-    /* TOPO DAS PÁGINAS */
-    $('#btnMenuSair').click(function(){
-        location.href='../index.html';
-    });
+    // Limpar os Campos do Formulário de Cadastro
+    /*$('#modalCadastro').on('hidden.bs.modal', function () {
+        $('#formCadastro').each(function(){
+            this.reset();
+        });
+    });*/    
 
     /* PÁGINA DE EMAIL */
+    $('#modalLerEmail').on('hidden.bs.modal', function () {
+        $('#fecharModalLeitura').click();
+    });
+    
     $(document).on('click','tbody tr',function(){
         
         // Pegando o nome da classe da linha
@@ -48,7 +59,7 @@ $(document).ready(function(){
             'assunto':$(coluna[2]).text(),
             'data':$(coluna[3]).text()
         };
-
+        
        if($(this).hasClass('enviado')){
             // Setando os valores das colunas na modal de leitura
             $('#modalLeituraAssunto').html(dados.assunto);           

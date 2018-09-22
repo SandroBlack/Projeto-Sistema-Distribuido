@@ -20,7 +20,7 @@
 				<div class="col-md-4 bg-light border">
 
 					<!-- Formulário de Login -->
-					<form class="" id="formLogin">
+					<form class="" id="formLogin">						
 						<h2 class="text-center text-dark pt-3"><i class="fas fa-user-lock"></i>&nbsp;LOGIN</h2>
 						<hr>					
 						<div class="input-group mb-4">
@@ -28,17 +28,16 @@
 								<span class="input-group-text" id="inputGroupPrepend"><i class="fas fa-at"></i></span>
 							</div>
 							<input type="email" class="form-control" id="email" name="email" placeholder="E-mail" aria-describedby="inputGroupPrepend" required>
-						</div>	
-						
+						</div>						
 						<div class="input-group mb-3">
 							<div class="input-group-prepend">
 							<span class="input-group-text" id="inputGroupPrepend"><i class="fas fa-key"></i></span>
 							</div>
 							<input type="password" class="form-control" id="senha" name="senha" placeholder="Senha" aria-describedby="inputGroupPrepend" required> 
 						</div>	
-						<div class="form-check">
-							<input type="checkbox" class="form-check-input" id="loginCheck">
-							<label class="form-check-label" for="loginCheck">Lembrar</label>
+						<div class="custom-control custom-checkbox">
+							<input type="checkbox" class="custom-control-input" id="loginCheck">
+							<label class="custom-control-label" for="loginCheck">Lembrar</label>
 						</div>
 						<hr>			
 						<button type="button" class="btn btn-primary float-right mb-3" id="btnLogin"><i class="fas fa-sign-in-alt"></i>&nbsp;Acessar</button>
@@ -53,23 +52,35 @@
 					<div class="modal-content">
 						<div class="modal-header">
 							<h5 class="modal-title" id="modalCadastroLabel"><span class="text-primary"><i class="fas fa-file-signature"></i></span>&nbsp;Cadastro de Usuário</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<button type="button" class="close" id="btnFecharModalCadastro" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
 
 						<div class="modal-body">
-							<form class="" id="formCadastro"> 
+							<form class="" id="formCadastro">								 
 								<label for="modalCadastroNome">Nome</label><br>            
-								<input type="text" class="form-control" name="nomeCadastro" id="modalCadastroNome" placeholder="Nome" required><br>          
-								<label for="modalCadastroEmail">Email</label> <br>                
-								<input type="email" class="form-control" name="emailCadastro" id="modalCadastroEmail" aria-describedby="emailHelp" placeholder="E-mail" required>  <br>       
-								<label for="modalCadastroSenha">Senha</label> <br>               
+								<input type="text" class="form-control" name="nomeCadastro" id="modalCadastroNome" placeholder="Nome" required><br>
+
+								<legend class="col-form-label">Sexo</legend>								
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" name="radioSexo" id="radioSexo1" class="custom-control-input" value="M">
+									<label class="custom-control-label" for="radioSexo1">Mascolino</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" name="radioSexo" id="radioSexo2" class="custom-control-input">
+									<label class="custom-control-label" for="radioSexo2">Feminino</label>
+								 </div>
+								 <br>
+								 <br>
+								<label for="modalCadastroEmail">Email</label><br>                
+								<input type="email" class="form-control" name="emailCadastro" id="modalCadastroEmail" aria-describedby="emailHelp" placeholder="E-mail" required><br>       
+								<label for="modalCadastroSenha">Senha</label><br>               
 								<input type="password" class="form-control" name="senhaCadastro" id="modalSenhaCadastro" placeholder="Senha" required><br>								
-								<label for="modalCadastroReSenha">Redigite a Senha</label> <br>             
+								<label for="modalCadastroReSenha">Redigite a Senha</label><br>             
 								<input type="password" class="form-control" name="reSenhaCadastro" id="modalReSenhaCadastro" placeholder="Redigite a Senha" required><br>				
 								<!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button> -->
-								<button type="button" class="btn btn-primary" id="btnModalCadastrar"><i class="fas fa-save"></i>&nbsp;Cadastrar</button><br>						
+								<button type="button" class="btn btn-primary float-right" id="btnModalCadastrar"><i class="fas fa-save"></i>&nbsp;Cadastrar</button><br>						
 							</form>
 						</div>
 
