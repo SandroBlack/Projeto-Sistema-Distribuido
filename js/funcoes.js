@@ -18,7 +18,31 @@ $(document).ready(function(){
        
         $.ajax({
             type:'post',
-            url:'../php/funcoes.php',
+            url:'php/funcoes.php',
+            data: {funcao,dados},
+            dataType:'html',
+            success:function(retorno){
+                console.log(retorno);
+            },
+            failure:function(msgErro){
+                console.log(msgErro);
+            },
+            error:function(erro){
+                console.log(erro);
+            }
+        });       
+
+    });
+	
+	// Função de Cadastro
+    $('#btnModalCadastrar').click(function(){
+        //location.href='paginas/inicio.html';          
+        var funcao = 'cadastro';                      
+        var dados = $('#formCadastro').serialize();               
+
+        $.ajax({
+            type:'post',
+            url:'php/funcoes.php',
             data: {funcao,dados},
             dataType:'html',
             success:function(retorno){

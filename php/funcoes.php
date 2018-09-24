@@ -9,6 +9,9 @@ switch($funcao){
     case "login":
         login();
         break;
+	case "cadastro":
+		cadastrar();
+		break;
 }
 
 
@@ -23,3 +26,43 @@ function login(){
     
     
 }
+
+function cadastrar(){
+	
+	$dados;
+	$nome;
+	$email;
+	$senha;
+	
+	if ( !isset( $_POST["dados"] ) ){
+		
+		echo "falha";
+		
+		return 0;
+		
+	}
+		
+	parse_str( $_POST["dados"], $dados );
+			
+	if ( empty( $dados["nomeCadastro"] ) || empty( $dados["emailCadastro"] ) || empty( $dados["senhaCadastro"] ) || empty( $dados["reSenhaCadastro"] ) ) {
+		
+		echo "falha";
+		
+		return 0;
+		
+	} else if ( $dados["senhaCadastro"] != $dados["reSenhaCadastro"] ) {
+		
+		echo "falha";
+		
+		return 0;
+		
+	}
+	
+	$nome 	= $dados["nomeCadastro"];
+	$email 	= $dados["emailCadastro"];	
+	$options = [
+		'cost' => 12,
+	];	
+	$senha = password_hash($dados["senhaCadastro"], PASSWORD_BCRYPT, $options);
+	
+};
