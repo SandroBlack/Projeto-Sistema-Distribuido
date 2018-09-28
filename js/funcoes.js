@@ -35,8 +35,7 @@ $(document).ready(function(){
     });
 	
 	// Função de Cadastro
-    $('#btnModalCadastrar').click(function(){
-        //location.href='paginas/inicio.html';          
+    $('#btnModalCadastrar').click(function(){                
         var funcao = 'cadastro';                      
         var dados = $('#formCadastro').serialize();               
 
