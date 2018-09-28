@@ -22,7 +22,13 @@ $(document).ready(function(){
             data: {funcao,dados},
             dataType:'html',
             success:function(retorno){
-                console.log(retorno);
+                //console.log(retorno);
+                if (retorno == 1 ){
+					location.href='paginas/inicio.html';					
+				}
+				else {
+					alert('Email ou Senha Invalido!');
+				}
             },
             failure:function(msgErro){
                 console.log(msgErro);
@@ -45,7 +51,10 @@ $(document).ready(function(){
             data: {funcao,dados},
             dataType:'html',
             success:function(retorno){
-                console.log(retorno);
+                //console.log(retorno);
+                if (returno == 1){
+					alert('Usuário Cadastrado Com Sucesso !');
+				}
             },
             failure:function(msgErro){
                 console.log(msgErro);
