@@ -12,7 +12,7 @@ $(document).ready(function(){
     /* PÁGINA INDEX */
     // Função de Login
     $('#btnLogin').click(function(){
-        location.href='paginas/inicio.html';          
+        //location.href='paginas/inicio.html';          
         var funcao = 'login';                      
         var dados = $('#formLogin').serialize();               
        
@@ -23,12 +23,20 @@ $(document).ready(function(){
             dataType:'html',
             success:function(retorno){
                 //console.log(retorno);
-                if (retorno == 1 ){
-					location.href='paginas/inicio.html';					
-				}
-				else {
-					alert('Email ou Senha Invalido!');
-				}
+                if (retorno == '0'){
+					alert('Favor Preencher todos os Campos!')					
+                }
+                else if(retorno == 'Inativo'){
+                    alert('Conta Inativa, Favor Verificar seu E-mail de Cadastro!');
+                }
+				else if(retorno == '1') {
+                    location.href='paginas/inicio.html';					
+				} else{
+                    alert('Email ou Senha Invalido!');
+                    $('#formLogin').each(function(){
+                        this.reset();
+                    });
+                }
             },
             failure:function(msgErro){
                 console.log(msgErro);
@@ -44,6 +52,7 @@ $(document).ready(function(){
     $('#btnModalCadastrar').click(function(){                
         var funcao = 'cadastro';                      
         var dados = $('#formCadastro').serialize();               
+        //console.log(dados);
 
         $.ajax({
             type:'post',
@@ -52,8 +61,20 @@ $(document).ready(function(){
             dataType:'html',
             success:function(retorno){
                 //console.log(retorno);
-                if (returno == 1){
-					alert('Usuário Cadastrado Com Sucesso !');
+                if (retorno == 'falha'){
+					alert('Dados Enexistentes!');
+                }
+                if (retorno == 'falha2'){
+					alert('Favor Preencher todos os Campos!');
+                }
+                if (retorno == 'falha3'){
+					alert('As Senhas Divergem!');
+				}
+                if (retorno == '1'){
+                    alert('Cadastrado Realizado com Sucesso, um E-mail Será Enviado para Confirmação do seu Cadastro!');
+                    $('#formCadastro').each(function(){
+                        this.reset();
+                    });
 				}
             },
             failure:function(msgErro){
@@ -62,7 +83,7 @@ $(document).ready(function(){
             error:function(erro){
                 console.log(erro);
             }
-        });       
+        });      
 
     });
 
