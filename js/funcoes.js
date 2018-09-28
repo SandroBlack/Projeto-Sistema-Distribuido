@@ -12,7 +12,7 @@ $(document).ready(function(){
     /* PÁGINA INDEX */
     // Função de Login
     $('#btnLogin').click(function(){
-        //location.href='paginas/inicio.html';          
+        //location.href='paginas/inicio.php';          
         var funcao = 'login';                      
         var dados = $('#formLogin').serialize();               
        
@@ -30,7 +30,7 @@ $(document).ready(function(){
                     alert('Conta Inativa, Favor Verificar seu E-mail de Cadastro!');
                 }
 				else if(retorno == '1') {
-                    location.href='paginas/inicio.html';					
+                    location.href='paginas/inicio.php';					
 				} else{
                     alert('Email ou Senha Invalido!');
                     $('#formLogin').each(function(){
@@ -72,6 +72,7 @@ $(document).ready(function(){
 				}
                 if (retorno == '1'){
                     alert('Cadastrado Realizado com Sucesso, um E-mail Será Enviado para Confirmação do seu Cadastro!');
+					confirmarCadastro();
                     $('#formCadastro').each(function(){
                         this.reset();
                     });
@@ -95,9 +96,54 @@ $(document).ready(function(){
     });*/    
 
     /* PÁGINA DE EMAIL */
+	
+	// Relacionando os Emails
+	var funcao = 'consultaEmail';
+	
+	$.ajax({
+			type:'post',
+			url:'php/funcoes.php',
+			data: {funcao},
+			dataType:'json',
+			success:function(retorno){
+				console.log(retorno);
+				/*$('#tblCaixaEntrada').append(
+					'<tr class="text-primary" data-target="#modalLerEmail" data-toggle="modal" style="cursor:pointer" id="XXX">');*/	
+			},
+			failure:function(msgErro){
+				console.log(msgErro);
+			},
+			error:function(erro){
+				console.log(erro);
+			}
+		});      
+	
     $('#modalLerEmail').on('hidden.bs.modal', function () {
         $('#fecharModalLeitura').click();
     });
+	
+	// Pesquisar Usuários Cadastrados
+	$('#novoEmailPara').keyup(function(){
+		var funcao = 'pesquisarUser';	
+		var texto = $(this).val();
+		//console.log(texto);
+		
+		$.ajax({
+			type:'post',
+			url:'php/funcoes.php',
+			data: {funcao, texto},
+			dataType:'json',
+			success:function(retorno){
+				console.log(retorno);				
+			},
+			failure:function(msgErro){
+				console.log(msgErro);
+			},
+			error:function(erro){
+				console.log(erro);
+			}
+		});      
+	});
     
     $(document).on('click','tbody tr',function(){
         
@@ -148,7 +194,62 @@ $(document).ready(function(){
         // Removendo a classe atual e setando a nova classe na linha
         $(this).removeClass('text-primary');
         $(this).addClass('text-secondary');
-    });
-
-    
-});
+    });	
+	
+	// Enviar E-mail
+		$('#btnNovoEmail').click(function(){			
+			var funcao = 'enviarEmail';
+			var acao = 'novoEmail';
+			var dados = $('#formNovoEmail').serialize();
+		
+			$.ajax({
+				type:'post',
+				url:'php/funcoes.php',
+				data: {funcao,dados},
+				dataType:'html',
+				success:function(retorno){
+					//console.log(retorno);
+					if(retorno == '1'){
+						alert('Mesagem Enviada com Sucesso.');
+					}
+				},
+				failure:function(msgErro){
+					console.log(msgErro);
+				},
+				error:function(erro){
+					console.log(erro);
+				}
+			});   
+		});
+		
+		// Enviar E-mail Resposta
+		$('#btnEnviarResposta').click(function(){
+			var funcao = 'enviarEmail';
+			var acao = 'resposta';
+			var mensagem = $('#modalLeituraMensagemResposta').val();
+			
+			$.ajax({
+				type:'post',
+				url:'php/funcoes.php',
+				data: {funcao, acao, mensagem},
+				dataType:'html',
+				success:function(retorno){
+					//console.log(retorno);
+					
+				},
+				failure:function(msgErro){
+					console.log(msgErro);
+				},
+				error:function(erro){
+					console.log(erro);
+				}
+			});      
+		});
+		
+		
+		
+		
+		
+		
+		
+});		
