@@ -28,8 +28,7 @@ switch($funcao){
 /* PÁGINA DE INDEX */
 
 // Função de Login
-function login(){
-	//$dados;
+function login(){	
 	parse_str($_POST["dados"], $dados);
 	$email = $dados["email"];
 	$senha = $dados["senha"];    
@@ -41,44 +40,61 @@ function login(){
 
 	try{
 		$pdo = conectar();
-		$sql = "SELECT email, senha, situacao FROM usuario WHERE email = :email";
+		$sql = "SELECT pk_usuario, nome, email, senha, situacao FROM usuario WHERE email = :email";
 		$stm = $pdo->prepare($sql);
 		$stm->bindValue(":email", $email); 	 
 		$stm->execute();
 		$dados = $stm->fetch(PDO::FETCH_ASSOC);
 		
-		if ($stm->rowCount() == 1){
-			if(password_verify($senha, $dados["senha"])){		
-				if($dados["situacao"] == 0){
-					echo "Inativo";
-					return 0;
-				} else{
-					$_SESSION["nomeUsuario"] = $dados["nome"]; 
-					echo "1";
-					return 0;
-				}
+		if ($stm->rowCount() == 1){									
+			if($dados["situacao"] == 0){
+				echo "Inativo";
+				return 0;
+			} else if(password_verify($senha, $dados["senha"])){	
+				$_SESSION["idUsuario"] = $dados["pk_usuario"]; 
+				$_SESSION["nomeUsuario"] = $dados["nome"]; 
+				echo "1";
+				return 0;
 			} else{
 				echo "2";
 				return 0;
-			}
+			}			 
 		} else{	
 			echo "2";
 			return 0;
 		}
-	} catch(){
-		echo "Erro: " . $ex->getMessage() . "<br>";
-	}	
+	} catch(PDOException $erro){
+		echo "Erro: " . $erro->getMessage() . "<br>";
+	}
+}
+
+// Consulta Cadastro
+function consultaCadastro($email){
+	try{
+		$pdo = conectar();
+		$sql = "SELECT email FROM usuario WHERE email = :email";
+		$stm = $pdo->prepare($sql);
+		$stm->bindValue(":email", $email); 	 
+		$stm->execute();
+		$dados = $stm->fetch(PDO::FETCH_ASSOC);
+		
+		if ($stm->rowCount() == 1){									
+			return true;	 
+		} else{	
+			return false;
+		}
+	} catch(PDOException $erro){
+		echo "Erro: " . $erro->getMessage() . "<br>";
+	}
 }
 
 // Função de Cadastro de Usuário
-function cadastrar(){
-	//var_dump($_POST["dados"]);
+function cadastrar(){	
 	if ( !isset( $_POST["dados"] ) ){
 		
 		echo "falha";
 		
-		return 0;
-		
+		return 0;		
 	} 
 
 	parse_str( $_POST["dados"], $dados );	
@@ -98,10 +114,13 @@ function cadastrar(){
 		
 		echo "falha3";
 		
-		return 0;
-		
+		return 0;		
 	}
-	
+	if(consultaCadastro($email)){
+		echo "cadastrado";
+		return 0;
+	}
+
 	$options = [
 		'cost' => 12,
 	];	
@@ -116,45 +135,53 @@ function cadastrar(){
 		$stm->bindValue(":email", $email);
 		$stm->bindValue(":senha", $senha);
 		$stm->execute();
-		echo "1";
+		//echo "1";		
 		confirmarCadastro($nome, $email);
-	
+		
 	} catch(PDOException $erro){
-		echo "Erro: " . $ex->getMessage() . "<br>";
+		echo "Erro: " . $erro->getMessage() . "<br>";
 	}
 }
 
 /* ENVIO DE EMAILS */
 
-// Pesquisar Usuário
+// Pesquisar Usuários Cadastrados
 function pesquisarUser(){
 	$texto  = $_POST["texto"];
 	
 	try{
 		$pdo = conectar();
-		$sql = "SELECT nome FROM usuario WHERE nome like ':nome%'";
+		$sql = "SELECT nome FROM usuario WHERE nome LIKE '$texto%'";
 		$stm = $pdo->prepare($sql);
-		$stm->bindValue(":nome", $texto);
+		//$stm->bindValue(":nome", $texto);
 		$stm->execute();
 		$dados = $stm->fetch(PDO::FETCH_ASSOC);
 		echo json_encode($dados);
 		
-	} catch(){
-		
+	} catch(PDOException $erro){
+		echo "Erro: " . $erro->getMessage() . "<br>";
 	}
 }
 
 // Relacionar E-mails
 function consultaEmail(){
+	$idUsuario = $_SESSION["idUsuario"];
+
 	try{
-		$sql = "SELECT * FROM email where fk_email_usuario_para = :usuario";
+		$pdo = conectar();
+		$sql = "SELECT a.nome, b.pk_email, b.assunto, c.data_mensagem, c.situacao 
+				FROM usuario a
+				INNER JOIN email b ON a.pk_usuario = b.fk_usuario_email_para
+				INNER JOIN mensagem c ON c.fk_email_mensagem = b.pk_email 
+				WHERE a.pk_usuario = :idUsuario";
 		$stm = $pdo->prepare($sql);
-		$stm->bindValue(":usuario", $_SESSION["nomeUsuario"]);		
+		$stm->bindValue(":idUsuario", $idUsuario);		
 		$stm->execute();
-		$dados = $stm->fetch(PDO::FETCH_ASSOC);
+		$dados = $stm->fetchAll(PDO::FETCH_ASSOC);		
 		echo json_encode($dados);
+		
 	} catch(PDOException $erro){
-		echo "Erro: " . $ex->getMessage() . "<br>";
+		echo "Erro: " . $erro->getMessage() . "<br>";
 	}
 }
 
@@ -164,7 +191,7 @@ function enviarEmail(){
 	
 	if($acao == "novoEmail"){
 		parse_str($_POST["dados"], $dados);
-		$de = $_SESSION["nomeUsuario"];	
+		$de = $_SESSION["idUsuario"];	
 		$para = $dados["novoEmailPara"];
 		$assunto = $dados["novoEmailAssunto"];
 		$mensagem = $dados["novoEmailMensagem"];
@@ -179,10 +206,10 @@ function enviarEmail(){
 			$stm->execute();
 			$idEmail = last_insert_id();	
 			conteudoEmail($para, $mensagem, $idEmail);
-			echo "1";
+			//echo "1";
 			
 		} catch(PDOException $erro){
-			echo "Erro: " . $ex->getMessage() . "<br>";
+			echo "Erro: " . $erro->getMessage() . "<br>";
 		}
 		
 	} else if($acao == "resposta"){
@@ -209,8 +236,8 @@ function enviarEmail(){
 			conteudoEmail($de, $mensagem, $idEmail);
 			
 		} catch(PDOException $erro){
-			echo "Erro: " . $ex->getMessage() . "<br>";
-		}		
+			echo "Erro: " . $erro->getMessage() . "<br>";
+		}	
 	}
 }
 
@@ -224,52 +251,44 @@ function conteudoEmail($de, $mensagem, $idEmail){
 		$stm->bindValue(":idEmail", $idEmail);
 		$stm->bindValue(":de", $de);
 		$stm->execute();
+		echo "1";
+
 	} catch(PDOException $erro){
-		echo "Erro: " . $ex->getMessage() . "<br>";
+		echo "Erro: " . $erro->getMessage() . "<br>";
 	}
 }
 
 // Confirmar Cadastro
-function confirmarCadastro($nome, $email) {
-    	
+function confirmarCadastro($nome, $email) {    	
     $para = $email;
     $assunto = "Confirmação de Cadastro";
     $mensagem = "<div style='width: 100%; height: 600px; background: #eee;'>
-
-		<div style='width: 600px; height: 500px; background: #fff; margin: 20px auto;'>
+					<div style='width: 600px; height: 500px; background: #fff; margin: 20px auto;'>
                     	<h2 align='center'>Validação de Cadastro</h2>
-                    <br><br><br>
-                    	<a href=https://sandroteck.000webhostapp.com/index.html>Clique Aqui para Validar seu Cadastro</a>
-
-                </div>
-
-            </div>" . "\r\n";
+                    	<br><br><br>
+                    	<a href=https://sandroteck.000webhostapp.com/validaCadastro.php align='center'>Clique Aqui para Validar seu Cadastro</a>
+                	</div>
+            	</div>" . "\r\n";
 
    $headers = 'MIME-Version: 1.1' . "\r\n";
    $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
    $headers .= 'From: Contato Sandroteck<contato@sandroteck.com.br>' . "\r\n";
-
    $headers .= 'To: '.$nome.' <'.$email.'>' . "\r\n";
-
    $headers .= 'Reply-To: <contato@sandroteck.com.br>' . "\r\n";
 
-
-   if(mail($para, $assunto, $mensagem, $headers)){    	
-   	
-    echo "1";
+   if(mail($para, $assunto, $mensagem, $headers)){   	
+   	echo "1";
     
-   }else{
+   } else{
     echo "2";
    }
 }
 
 // Recuperar Senha
 function emailRecuperaSenha() {
-    $email = $_POST["email"];
-	
     $para = $_POST["email"];
-    $assunto = "Redefinição de Senha";
-
+	$assunto = "Redefinição de Senha";
+	
     $corpo = "<b>Mensagem de Contato</b><br><br>";
     $corpo .= "<b>Nome: </b> $nome";
     $corpo .= "<br><b>Email: </b> $email";
@@ -280,25 +299,7 @@ function emailRecuperaSenha() {
         @mail($para, $assunto, $corpo, $header);
         echo "<script>alert('Sua Mensagem foi Enviada com Sucesso!')</script>";
         echo "<script>location.href='http://www.sandroteck.zz.vc/?pagina=recuperarSenha'</script>";
-    } catch (Exception $ex) {
-        echo "Erro: " . $ex->getMessage() . "<br>";
+    } catch (Exception $erro) {
+        echo "Erro: " . $erro->getMessage() . "<br>";
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,8 +1,8 @@
 <?php
 	if(!isset($_SESSION)){
-    session_start();
-}
-
+        session_start();
+    }
+?>
 
 <!doctype html>
 <html lang="br">
@@ -46,6 +46,7 @@
                                 </li>                                                                
                             </ul>
                         </div>
+                        <span class="text-light mr-5"><?=$_SESSION["nomeUsuario"]?></span>
                         <div class="dropdown">
                             <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-user-circle fa-1x"></i>  
@@ -98,24 +99,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="text-primary" data-target="#modalLerEmail" data-toggle="modal" style="cursor:pointer" id="XXX">
+                                    <!--<tr class="text-primary" data-target="#modalLerEmail" data-toggle="modal" style="cursor:pointer" id="XXX">
                                         <th scope="row">1</th>
                                         <td>Mark</td>
                                         <td>Assunto Recebido 01</td>
                                         <td>22/08/2018</td>
-                                    </tr>
-                                    <tr class="text-primary" data-target="#modalLerEmail" data-toggle="modal" style="cursor:pointer" id="YYY">
-                                        <th scope="row">2</th>
-                                        <td>Jacob</td>
-                                        <td>Assunto Recebido 02</td>
-                                        <td>21/08/2018</td>
-                                    </tr>
-                                    <tr class="text-primary" data-target="#modalLerEmail" data-toggle="modal" style="cursor:pointer" id="ZZZ">
-                                        <th scope="row">3</th>
-                                        <td>Larry the Bird</td>
-                                        <td>Assunto Recebido 03</td>
-                                        <td>20/08/2018</td>
-                                    </tr>
+                                    </tr>-->
+                                    
                                 </tbody>
                             </table>
                         </div>
@@ -132,24 +122,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="text-secondary enviado" data-target="#modalLerEmail" data-toggle="modal" style="cursor:pointer">
+                                    <!--<tr class="text-secondary enviado" data-target="#modalLerEmail" data-toggle="modal" style="cursor:pointer">
                                         <th scope="row">1</th>
                                         <td>Gambit</td>
                                         <td>Assunto Enviado 1</td>
                                         <td>25/08/2018</td>
-                                    </tr>
-                                    <tr class="text-secondary enviado" data-target="#modalLerEmail" data-toggle="modal" style="cursor:pointer">
-                                        <th scope="row">2</th>
-                                        <td>Logan</td>
-                                        <td>Assunto Enviado 2</td>
-                                        <td>24/08/2018</td>
-                                    </tr>
-                                    <tr class="text-secondary enviado" data-target="#modalLerEmail" data-toggle="modal" style="cursor:pointer">
-                                        <th scope="row">3</th>
-                                        <td>Peter Paker</td>
-                                        <td>Assunto Enviado 03</td>
-                                        <td>26/08/2018</td>
-                                    </tr>
+                                    </tr>-->
+                                    
                                 </tbody>
                             </table>
                         </div>                       

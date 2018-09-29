@@ -15,7 +15,7 @@ $(document).ready(function(){
         //location.href='paginas/inicio.php';          
         var funcao = 'login';                      
         var dados = $('#formLogin').serialize();               
-       
+        
         $.ajax({
             type:'post',
             url:'php/funcoes.php',
@@ -44,15 +44,14 @@ $(document).ready(function(){
             error:function(erro){
                 console.log(erro);
             }
-        });       
+        });    
 
     });
 	
 	// Função de Cadastro
     $('#btnModalCadastrar').click(function(){                
         var funcao = 'cadastro';                      
-        var dados = $('#formCadastro').serialize();               
-        //console.log(dados);
+        var dados = $('#formCadastro').serialize();          
 
         $.ajax({
             type:'post',
@@ -63,19 +62,21 @@ $(document).ready(function(){
                 //console.log(retorno);
                 if (retorno == 'falha'){
 					alert('Dados Enexistentes!');
-                }
-                if (retorno == 'falha2'){
+                } else if(retorno == 'falha2'){
 					alert('Favor Preencher todos os Campos!');
-                }
-                if (retorno == 'falha3'){
-					alert('As Senhas Divergem!');
-				}
+                } else if(retorno == 'falha3'){
+                    alert('As Senhas Divergem!');
+                    $('#modalSenhaCadastro').focus();
+                } else if(retorno == 'cadastrado'){
+                    alert('Já Existe um Cadastro com o E-mail Informado!');
+                    $('#modalCadastroEmail').focus();
+                } 
                 if (retorno == '1'){
-                    alert('Cadastrado Realizado com Sucesso, um E-mail Será Enviado para Confirmação do seu Cadastro!');
-					confirmarCadastro();
+                    alert('Cadastrado Realizado com Sucesso, um E-mail Será Enviado para Confirmação do seu Cadastro!');					
                     $('#formCadastro').each(function(){
                         this.reset();
                     });
+                    location.href='index.html';
 				}
             },
             failure:function(msgErro){
@@ -102,13 +103,20 @@ $(document).ready(function(){
 	
 	$.ajax({
 			type:'post',
-			url:'php/funcoes.php',
+			url:'../php/funcoes.php',
 			data: {funcao},
 			dataType:'json',
 			success:function(retorno){
-				console.log(retorno);
-				/*$('#tblCaixaEntrada').append(
-					'<tr class="text-primary" data-target="#modalLerEmail" data-toggle="modal" style="cursor:pointer" id="XXX">');*/	
+                //console.log(retorno.length);
+                for(i = 0; i < retorno.length; i++){
+                    $('#tblCaixaEntrada').append(
+                        '<tr class="text-primary" data-target="#modalLerEmail" data-toggle="modal" style="cursor:pointer" id="'+ retorno[i].pk_email +'">'
+                            +'<th scope="row">'+ (i+1) +'</th>'
+                            +'<td>'+ retorno[i].nome +'</td>'
+                            +'<td>'+ retorno[i].assunto +'</td>'
+                            +'<td>'+ retorno[i].data_mensagem +'</td>'
+                        +'</tr>');
+                }    	
 			},
 			failure:function(msgErro){
 				console.log(msgErro);
@@ -116,7 +124,7 @@ $(document).ready(function(){
 			error:function(erro){
 				console.log(erro);
 			}
-		});      
+		});     
 	
     $('#modalLerEmail').on('hidden.bs.modal', function () {
         $('#fecharModalLeitura').click();
@@ -130,11 +138,12 @@ $(document).ready(function(){
 		
 		$.ajax({
 			type:'post',
-			url:'php/funcoes.php',
+			url:'../php/funcoes.php',
 			data: {funcao, texto},
 			dataType:'json',
 			success:function(retorno){
-				console.log(retorno);				
+                console.log(retorno);
+                $(this).html(retorno.nome);				
 			},
 			failure:function(msgErro){
 				console.log(msgErro);
@@ -142,7 +151,7 @@ $(document).ready(function(){
 			error:function(erro){
 				console.log(erro);
 			}
-		});      
+		});     
 	});
     
     $(document).on('click','tbody tr',function(){
@@ -204,14 +213,14 @@ $(document).ready(function(){
 		
 			$.ajax({
 				type:'post',
-				url:'php/funcoes.php',
-				data: {funcao,dados},
+				url:'../php/funcoes.php',
+				data: {funcao, acao, dados},
 				dataType:'html',
 				success:function(retorno){
-					//console.log(retorno);
-					if(retorno == '1'){
+					console.log(retorno);
+					/*if(retorno == '1'){
 						alert('Mesagem Enviada com Sucesso.');
-					}
+					}*/
 				},
 				failure:function(msgErro){
 					console.log(msgErro);
@@ -244,12 +253,6 @@ $(document).ready(function(){
 					console.log(erro);
 				}
 			});      
-		});
-		
-		
-		
-		
-		
-		
+		});	
 		
 });		

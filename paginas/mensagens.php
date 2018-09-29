@@ -1,10 +1,11 @@
 <?php
-if(!isset($_SESSION)){
-    session_start();
-}
+    if(!isset($_SESSION)){
+        session_start();
+    }
+?>
 
 <!doctype html>
-<html lang="br">
+<html lang="pt-BR">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -45,6 +46,7 @@ if(!isset($_SESSION)){
                                 </li>                                                                
                             </ul>
                         </div>
+                        <span class="text-light mr-5"><?=$_SESSION["nomeUsuario"]?></span>
                         <div class="dropdown">
                             <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-user-circle fa-1x"></i>    

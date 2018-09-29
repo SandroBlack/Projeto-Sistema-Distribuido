@@ -1,10 +1,11 @@
 <?php
-if(!isset($_SESSION)){
-    session_start();
-}
+    if(!isset($_SESSION)){
+        session_start();
+    }
+?>
 
 <!doctype html>
-<html lang="br">
+<html lang="pt-BR">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -45,6 +46,7 @@ if(!isset($_SESSION)){
                                 </li>                                                                
                             </ul>
                         </div>
+                        <span class="text-light mr-5"><?=$_SESSION["nomeUsuario"]?></span>
                         <div class="dropdown">
                             <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-user-circle fa-1x"></i>
@@ -88,7 +90,7 @@ if(!isset($_SESSION)){
                     <div class="card" style="width: 18rem;">                       
                         <div class="card-body">
                             <h5 class="card-title text-center text-dark"><i class="fas fa-envelope-square"></i>&nbsp;E-mail</h5>
-                            <h1 class="card-text text-center text-secondary contEmail" id="cardMensagem">0</h1>
+                            <h1 class="card-text text-center text-secondary contEmail" id="cardMensagem"><?=$_SESSION["qtdEmails"]?></h1>
                             <a href="email.html" class="btn btn-primary btn-sm align-middle btn-block"><i class="far fa-eye"></i>&nbsp;Verificar</a>
                         </div>
                     </div>
