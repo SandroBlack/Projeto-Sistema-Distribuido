@@ -15,7 +15,7 @@ function conectar(){
 	
 	try{
 		//$conn = new PDO("mysql:host=".$host. ";dbname=" .$banco, $usr, $pwd); //<- Mysql
-		$conn = new PDO("pgsql:host=".$host. ";port=5432 ;dbname=" .$banco, $usr, $pwd); // <- Postegre
+		$conn = new PDO("pgsql:host=".$host. ";dbname=" .$banco, $usr, $pwd); // <- Postegre
 		$conn->exec("SET names utf8");
 		//return array("conexao"=>$conn, "mensagem"=>"sucesso");
 	} catch(PDOException $e) {
