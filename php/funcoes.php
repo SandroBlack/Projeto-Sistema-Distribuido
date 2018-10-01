@@ -160,8 +160,8 @@ function cadastrar(){
 		$stm->bindValue(":senha", $senha);
 		$stm->bindValue(":situacao", $situacao);
 		$stm->execute();
-		//echo "1";		
-		confirmarCadastro($nome, $email);
+		echo "1";		
+		//confirmarCadastro($nome, $email);
 		
 	} catch(PDOException $erro){
 		echo "Erro: " . $erro->getMessage() . "<br>";
@@ -365,7 +365,7 @@ function confirmarCadastro($nome, $email) {
 					<div style='width: 600px; height: 500px; background: #fff; margin: 20px auto;'>
                     	<h2 align='center'>Validação de Cadastro</h2>
                     	<br><br><br>
-                    	<a href=https://sandroteck.000webhostapp.com/validaCadastro.php align='center'>Clique Aqui para Validar seu Cadastro</a>
+                    	<a href=http://projeto-sistemas-distribuidos.herokuapp.com/validaCadastro.php align='center'>Clique Aqui para Validar seu Cadastro</a>
                 	</div>
             	</div>" . "\r\n";
 
