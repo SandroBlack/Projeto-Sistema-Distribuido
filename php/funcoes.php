@@ -230,6 +230,7 @@ function consultaEmailEnviado(){
 // Contar Emails não Lidos
 function contarEmailNaoLido(){
 	$idUsuario = $_SESSION["idUsuario"];
+	
 	try{
 		$pdo = conectar();
 		$sql = "SELECT COUNT(conteudo) AS qtd
@@ -239,8 +240,12 @@ function contarEmailNaoLido(){
 		$stm = $pdo->prepare($sql);				
 		$stm->execute();
 		$dados = $stm->fetch(PDO::FETCH_ASSOC);
-		$_SESSION["qtdEmails"] = $dados["qtd"];				
-				
+		if($dados["qtd"] == 0){
+			$_SESSION["qtdEmails"] = 0;				
+		} else{
+			$_SESSION["qtdEmails"] = $dados["qtd"];
+		}
+		
 	} catch(PDOException $erro){
 		echo "Erro: " . $erro->getMessage() . "<br>";
 	}
