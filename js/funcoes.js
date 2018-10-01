@@ -197,7 +197,7 @@ $(document).ready(function(){
         data: {funcao},
         dataType:'html',
         success:function(retorno){
-            //console.log(retorno);                           	
+            console.log(retorno);                           	
         },
         failure:function(msgErro){
             console.log(msgErro);

@@ -243,7 +243,8 @@ function contarEmailNaoLido(){
 		$stm = $pdo->prepare($sql);				
 		$stm->execute();
 		$dados = $stm->fetch(PDO::FETCH_ASSOC);
-		$_SESSION["qtdEmails"] = $dados["qtd"];		
+		//$_SESSION["qtdEmails"] = $dados["qtd"];
+		var_dump($dados["qtd"]);		
 		
 	} catch(PDOException $erro){
 		echo "Erro: " . $erro->getMessage() . "<br>";
