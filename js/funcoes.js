@@ -53,6 +53,7 @@ $(document).ready(function(){
 					$('#email').focus();	
 				} else{
                     alert('Usuário não Cadastrado no Sistema!');
+					$('#email').focus();
                 }
             },
             failure:function(msgErro){
