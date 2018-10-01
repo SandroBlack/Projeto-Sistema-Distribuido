@@ -44,9 +44,11 @@ switch($funcao){
 
 // Função de Login
 function login(){	
-	parse_str($_POST["dados"], $dados);
+	/*parse_str($_POST["dados"], $dados);
 	$email = $dados["email"];
-	$senha = $dados["senha"];    
+	$senha = $dados["senha"];*/
+	$email = $_POST["email"];
+	$senha = $_POST["senha"];	
 	
 	if(empty($email) || empty($senha)){
 		echo "0";
@@ -242,11 +244,7 @@ function contarEmailNaoLido(){
 		$stm = $pdo->prepare($sql);				
 		$stm->execute();
 		$dados = $stm->fetch(PDO::FETCH_ASSOC);
-		if($dados["qtd"] == 0){
-			$_SESSION["qtdEmails"] = 0;				
-		} else{
-			$_SESSION["qtdEmails"] = $dados["qtd"];
-		}
+		$_SESSION["qtdEmails"] = $dados["qtd"];		
 		
 	} catch(PDOException $erro){
 		echo "Erro: " . $erro->getMessage() . "<br>";
