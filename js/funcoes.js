@@ -50,9 +50,7 @@ $(document).ready(function(){
                     location.href='paginas/inicio.php';					
 				} else if(retorno == '2'){
 					alert('Email ou Senha Invalido!');
-                    $('#formLogin').each(function(){
-                        this.reset();
-                    });
+					$('#email').focus();	
 				} else{
                     alert('Usuário não Cadastrado no Sistema!');
                 }

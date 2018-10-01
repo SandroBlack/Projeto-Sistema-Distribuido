@@ -1,9 +1,7 @@
-<?php
-	
-    if(!isset($_SESSION["logado"])){
-        session_start();
-        //session_destroy();
-        //header("Location:../index.html");
+<?php	
+    session_start();
+    if(!isset($_SESSION["logado"]) || $_SESSION["logado"] != true){
+        header("Location:../index.html");
     }
 ?>
 
