@@ -39,7 +39,7 @@ $(document).ready(function(){
             data: {funcao,dados},
             dataType:'html',
             success:function(retorno){
-                //console.log(retorno);
+                console.log(retorno);
                 if (retorno == '0'){
 					alert('Favor Preencher todos os Campos!')					
                 }
