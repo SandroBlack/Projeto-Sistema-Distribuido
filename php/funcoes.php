@@ -48,11 +48,10 @@ function login(){
 	$email = $dados["email"];
 	$senha = $dados["senha"];	
 	
-	var_dump($dados);
-	/*if(empty($email) || empty($senha)){
+	if(empty($email) || empty($senha)){
 		echo "0";
 		return 0;
-	}*/	
+	}	
 
 	try{
 		$pdo = conectar();
@@ -141,6 +140,7 @@ function cadastrar(){
 		
 		return 0;		
 	}
+	
 	if(consultaCadastro($email)){
 		echo "cadastrado";
 		return 0;
