@@ -126,7 +126,8 @@ function cadastrar(){
 	$email   = $dados["emailCadastro"];
 	$senha   = $dados["senhaCadastro"];	
 	$reSenha = $dados["reSenhaCadastro"];	
-		
+	$situacao = true; // Depois que a função de envio de e-mail de confirmação estiver pronta, essa linha deve ser removida.	
+	
 	if (empty($nome) || empty($sexo) || empty($email) || empty($senha) || empty($reSenha)){
 		
 		echo "falha2";
@@ -151,12 +152,13 @@ function cadastrar(){
 
 	try{
 		$pdo = conectar();
-		$sql = "INSERT INTO usuario(nome, sexo, email, senha) VALUES(:nome, :sexo, :email, :senha)";
+		$sql = "INSERT INTO usuario(nome, sexo, email, senha, situacao) VALUES(:nome, :sexo, :email, :senha, :situacao)";
 		$stm = $pdo->prepare($sql);
 		$stm->bindValue(":nome", $nome);
 		$stm->bindValue(":sexo", $sexo);
 		$stm->bindValue(":email", $email);
 		$stm->bindValue(":senha", $senha);
+		$stm->bindValue(":situacao", $situacao);
 		$stm->execute();
 		//echo "1";		
 		confirmarCadastro($nome, $email);
