@@ -48,11 +48,13 @@ $(document).ready(function(){
                 }
 				else if(retorno == '1') {
                     location.href='paginas/inicio.php';					
-				} else{
-                    alert('Email ou Senha Invalido!');
+				} else if(retorno == '2'){
+					alert('Email ou Senha Invalido!');
                     $('#formLogin').each(function(){
                         this.reset();
                     });
+				} else{
+                    alert('Usuário não Cadastrado no Sistema!');
                 }
             },
             failure:function(msgErro){

@@ -76,7 +76,7 @@ function login(){
 				return 0;
 			}			 
 		} else{	
-			echo "2";
+			echo "3";
 			return 0;
 		}
 	} catch(PDOException $erro){
