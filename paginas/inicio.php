@@ -1,6 +1,9 @@
 <?php
+   
     if(!isset($_SESSION)){
         session_start();
+        //session_destroy();
+        //header("Location:../index.html");
     }
 ?>
 
@@ -18,6 +21,7 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
     <title>Inicio</title>
+    
     </head>
     
     <body>
@@ -39,7 +43,7 @@
                                     <a class="nav-link text-light" href="arquivos.php"><i class="fas fa-file-alt"></i>&nbsp;Arquivos<span class="sr-only">(current)</span></a>
                                 </li>                                                                
                                 <li class="nav-item">
-                                    <a class="nav-link text-light" href="email.php"><i class="fas fa-envelope-square"></i>&nbsp;E-mail&nbsp;<span class="badge badge-primary contEmail">0</span><span class="sr-only">(current)</span></a>
+                                    <a class="nav-link text-light" href="email.php"><i class="fas fa-envelope-square"></i>&nbsp;E-mail&nbsp;<span class="badge badge-primary contEmail"><?=$_SESSION["qtdEmails"]?></span><span class="sr-only">(current)</span></a>
                                 </li>                                                                
                                 <li class="nav-item">
                                     <a class="nav-link text-light" href="pendencias.php"><i class="fas fa-exclamation-triangle"></i>&nbsp;Pendências&nbsp;<span class="badge badge-primary">0</span><span class="sr-only">(current)</span></a>
@@ -82,7 +86,7 @@
                         <div class="card-body">
                             <h5 class="card-title text-center text-dark"><i class="fas fa-file-alt"></i>&nbsp;Arquivos</h5>
                             <h1 class="card-text text-center text-secondary" id="cardArquivo">0</h1>
-                            <a href="arquivos.html" class="btn btn-primary btn-sm align-middle btn-block"><i class="far fa-eye"></i>&nbsp;Verificar</a>
+                            <a href="arquivos.php" class="btn btn-primary btn-sm align-middle btn-block"><i class="far fa-eye"></i>&nbsp;Verificar</a>
                         </div>
                     </div>
                 </div>
@@ -91,7 +95,7 @@
                         <div class="card-body">
                             <h5 class="card-title text-center text-dark"><i class="fas fa-envelope-square"></i>&nbsp;E-mail</h5>
                             <h1 class="card-text text-center text-secondary contEmail" id="cardMensagem"><?=$_SESSION["qtdEmails"]?></h1>
-                            <a href="email.html" class="btn btn-primary btn-sm align-middle btn-block"><i class="far fa-eye"></i>&nbsp;Verificar</a>
+                            <a href="email.php" class="btn btn-primary btn-sm align-middle btn-block"><i class="far fa-eye"></i>&nbsp;Verificar</a>
                         </div>
                     </div>
                 </div>
@@ -100,7 +104,7 @@
                         <div class="card-body">
                             <h5 class="card-title text-center text-dark"><i class="fas fa-exclamation-triangle"></i>&nbsp;Pendências</h5>
                             <h1 class="card-text text-center text-secondary" id="cardPendencia">0</h1>
-                            <a href="pendencias.html" class="btn btn-primary btn-sm align-middle btn-block"><i class="far fa-eye"></i>&nbsp;Verificar</a>
+                            <a href="pendencias.php" class="btn btn-primary btn-sm align-middle btn-block"><i class="far fa-eye"></i>&nbsp;Verificar</a>
                         </div>
                     </div>
                 </div>

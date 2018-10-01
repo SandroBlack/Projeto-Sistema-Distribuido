@@ -1,12 +1,29 @@
 $(document).ready(function(){
 
     // Contando quantas linhas tem na tabela de e-mail
-    var qtdLinhas = $('#tblCaixaEntrada tbody tr').length;
-    $('.contEmail').html(qtdLinhas);    
+    //var qtdLinhas = $('#tblCaixaEntrada tbody tr').length;
+    //$('.contEmail').html(qtdLinhas);    
 
     /* TOPO DAS PÁGINAS */
     $('#btnMenuSair').click(function(){
-        location.href='../index.html';
+        var funcao = 'sair';
+        
+        $.ajax({
+            type:'post',
+            url:'../php/funcoes.php',
+            data: {funcao},
+            dataType:'html',
+            success:function(retorno){
+                //console.log(retorno);               
+                location.href='../index.html';  
+            },
+            failure:function(msgErro){
+                console.log(msgErro);
+            },
+            error:function(erro){
+                console.log(erro);
+            }
+        });    
     });
 
     /* PÁGINA INDEX */
@@ -47,6 +64,16 @@ $(document).ready(function(){
         });    
 
     });
+
+    // Dar foco no Input E-mail
+    $("#email").focus();
+
+    // Detectar Quando Pressionar a Tecla Enter
+	$(document).keypress(function(e) {
+		if(e.which == 13) {
+			$("#btnLogin").click();
+		}
+	});
 	
 	// Função de Cadastro
     $('#btnModalCadastrar').click(function(){                
@@ -89,6 +116,13 @@ $(document).ready(function(){
 
     });
 
+    // Detectar Quando Pressionar a Tecla Enter
+	$(document).keypress(function(e) {
+		if(e.which == 13) {
+			$("#btnModalCadastrar").click();
+		}
+	});
+
     // Limpar os Campos do Formulário de Cadastro
     /*$('#modalCadastro').on('hidden.bs.modal', function () {
         $('#formCadastro').each(function(){
@@ -98,34 +132,81 @@ $(document).ready(function(){
 
     /* PÁGINA DE EMAIL */
 	
-	// Relacionando os Emails
-	var funcao = 'consultaEmail';
+    // Relacionando os Emails Recebidos   
+	var funcao = 'consultaEmailRecebido';
 	
 	$.ajax({
-			type:'post',
-			url:'../php/funcoes.php',
-			data: {funcao},
-			dataType:'json',
-			success:function(retorno){
-                //console.log(retorno.length);
-                for(i = 0; i < retorno.length; i++){
-                    $('#tblCaixaEntrada').append(
-                        '<tr class="text-primary" data-target="#modalLerEmail" data-toggle="modal" style="cursor:pointer" id="'+ retorno[i].pk_email +'">'
-                            +'<th scope="row">'+ (i+1) +'</th>'
-                            +'<td>'+ retorno[i].nome +'</td>'
-                            +'<td>'+ retorno[i].assunto +'</td>'
-                            +'<td>'+ retorno[i].data_mensagem +'</td>'
-                        +'</tr>');
-                }    	
-			},
-			failure:function(msgErro){
-				console.log(msgErro);
-			},
-			error:function(erro){
-				console.log(erro);
-			}
-		});     
+        type:'post',
+        url:'../php/funcoes.php',
+        data: {funcao},
+        dataType:'json',
+        success:function(retorno){
+            //console.log(retorno.length);
+            for(i = 0; i < retorno.length; i++){
+                $('#tblCaixaEntrada').append(
+                    '<tr class="text-primary recebido" data-target="#modalLerEmail" data-toggle="modal" style="cursor:pointer" id="'+ retorno[i].pk_email +'">'
+                        +'<th scope="row">'+ (i+1) +'</th>'
+                        +'<td>'+ retorno[i].nome +'</td>'
+                        +'<td>'+ retorno[i].assunto +'</td>'
+                        +'<td>'+ retorno[i].data_mensagem +'</td>'
+                    +'</tr>');
+            }    	
+        },
+        failure:function(msgErro){
+            console.log(msgErro);
+        },
+        error:function(erro){
+            console.log(erro);
+        }
+    }); 
+    
+    // Relacionando os Emails Enviados  
+	var funcao = 'consultaEmailEnviado';
 	
+	$.ajax({
+        type:'post',
+        url:'../php/funcoes.php',
+        data: {funcao},
+        dataType:'json',
+        success:function(retorno){
+            //console.log(retorno.length);
+            for(i = 0; i < retorno.length; i++){
+                $('#tblCaixaSaida').append(
+                    '<tr class="text-secondary enviado" data-target="#modalLerEmail" data-toggle="modal" style="cursor:pointer" id="'+ retorno[i].pk_email +'">'
+                        +'<th scope="row">'+ (i+1) +'</th>'
+                        +'<td>'+ retorno[i].nome +'</td>'
+                        +'<td>'+ retorno[i].assunto +'</td>'
+                        +'<td>'+ retorno[i].data_mensagem +'</td>'
+                    +'</tr>');
+            }    	
+        },
+        failure:function(msgErro){
+            console.log(msgErro);
+        },
+        error:function(erro){
+            console.log(erro);
+        }
+    });    
+    
+    // Contar E-mails não Lidos
+    var funcao = 'contarEmailNaoLido';
+
+    $.ajax({
+        type:'post',
+        url:'../php/funcoes.php',
+        data: {funcao},
+        dataType:'html',
+        success:function(retorno){
+            //console.log(retorno);                           	
+        },
+        failure:function(msgErro){
+            console.log(msgErro);
+        },
+        error:function(erro){
+            console.log(erro);
+        }
+    });    
+
     $('#modalLerEmail').on('hidden.bs.modal', function () {
         $('#fecharModalLeitura').click();
     });
@@ -142,8 +223,19 @@ $(document).ready(function(){
 			data: {funcao, texto},
 			dataType:'json',
 			success:function(retorno){
-                console.log(retorno);
-                $(this).html(retorno.nome);				
+                //console.log(retorno);
+                if(retorno != false){
+                    //for(i = 0; i < retorno.length; i++){
+                    $('').empty();    
+                    $('#novoEmailGrupo').append(                                               
+                            //+'<div class="dropdown-menu" id="dropdown-menu1" aria-labelledby="dropdownMenu">'
+                            //+   '<button type="button" class="dropdown-item" id="">'+ retorno.nome +'</button>'            
+                            //+'</div>'
+                        '<ul>'
+                            +'<li><a href="#">'+ retorno.pk_usuario + ' - ' + retorno.nome +'</a></li>'    
+                       +'</ul>');
+                //}
+                }  				
 			},
 			failure:function(msgErro){
 				console.log(msgErro);
@@ -154,10 +246,41 @@ $(document).ready(function(){
 		});     
 	});
     
+    // Click nas Linhas das Tabelas
+    // Leitura de E-mails
     $(document).on('click','tbody tr',function(){
-        
         // Pegando o nome da classe da linha
-        var classe = $(this).attr('class');
+        var funcao = 'lerEmail';
+        var classe = $(this).attr('class');        
+        var recebido = $(this).hasClass('recebido');
+        idEmail = this.id;
+        
+        if(recebido){
+            var acao = 'recebido';
+        } else{
+            var acao = 'enviado';
+        }
+
+        $.ajax({
+			type:'post',
+			url:'../php/funcoes.php',
+			data: {funcao, acao},
+			dataType:'json',
+			success:function(retorno){
+                //console.log(retorno);            
+                $('#deModalLeitura').html('De: ' + retorno.nome);
+                $('#paraModalLeitura').html('Para: ');
+                $('#modalLeituraAssunto').html(retorno.assunto);
+                $('#leituraMensagem').html(retorno.conteudo);
+                $('#dataEmail').html(retorno.data_mensagem);                 				
+			},
+			failure:function(msgErro){
+				console.log(msgErro);
+			},
+			error:function(erro){
+				console.log(erro);
+			}
+		});       
                
         // Pegando o texto das colunas
         var coluna = $(this).children();       
@@ -170,20 +293,20 @@ $(document).ready(function(){
         
        if($(this).hasClass('enviado')){
             // Setando os valores das colunas na modal de leitura
-            $('#modalLeituraAssunto').html(dados.assunto);           
+            /*$('#modalLeituraAssunto').html(dados.assunto);           
             $('#deModalLeitura').html('De: Usuário');
             $('#paraModalLeitura').html('Para: ' + dados.nome);
             $('#dataEmail').html(dados.data);
-            $('#leituraMensagem').html('Esta é uma mensagem que foi Enviada como teste!');
+            $('#leituraMensagem').html('Esta é uma mensagem que foi Enviada como teste!');*/
             $('#btnResponder').css('display','none');            
         } else{  
             $('#btnResponder').css('display','block'); 
             // Setando os valores das colunas na modal de leitura
-            $('#modalLeituraAssunto').html(dados.assunto);
+            /*$('#modalLeituraAssunto').html(dados.assunto);
             $('#deModalLeitura').html('De: ' + dados.nome);
             $('#paraModalLeitura').html('Para: Usuário');
             $('#dataEmail').html(dados.data);
-            $('#leituraMensagem').html('Esta é uma mensagem que foi Recebida como teste!');
+            $('#leituraMensagem').html('Esta é uma mensagem que foi Recebida como teste!');*/
 
             // Mostra a div com o campo de resposta
             $('#btnResponder').click(function(){
@@ -218,9 +341,10 @@ $(document).ready(function(){
 				dataType:'html',
 				success:function(retorno){
 					console.log(retorno);
-					/*if(retorno == '1'){
-						alert('Mesagem Enviada com Sucesso.');
-					}*/
+					if(retorno == '1'){
+                        alert('Mesagem Enviada com Sucesso.');
+                        window.location.reload();                        
+					}
 				},
 				failure:function(msgErro){
 					console.log(msgErro);
@@ -233,17 +357,18 @@ $(document).ready(function(){
 		
 		// Enviar E-mail Resposta
 		$('#btnEnviarResposta').click(function(){
-			var funcao = 'enviarEmail';
+            var funcao = 'enviarEmail';
 			var acao = 'resposta';
+            var idResposta = idEmail;
 			var mensagem = $('#modalLeituraMensagemResposta').val();
 			
 			$.ajax({
 				type:'post',
-				url:'php/funcoes.php',
-				data: {funcao, acao, mensagem},
+				url:'../php/funcoes.php',
+				data: {funcao, acao, idResposta, mensagem},
 				dataType:'html',
 				success:function(retorno){
-					//console.log(retorno);
+					console.log(retorno);
 					
 				},
 				failure:function(msgErro){
@@ -253,6 +378,10 @@ $(document).ready(function(){
 					console.log(erro);
 				}
 			});      
-		});	
+        });	
+        
+        // Leitura de E-mails
+
+
 		
 });		

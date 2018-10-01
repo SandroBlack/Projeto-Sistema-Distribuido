@@ -5,7 +5,7 @@
 ?>
 
 <!doctype html>
-<html lang="br">
+<html lang="pt-BR">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -40,7 +40,7 @@
                                         <a class="nav-link text-light" href="arquivos.php"><i class="fas fa-file-alt"></i>&nbsp;Arquivos<span class="sr-only">(current)</span></a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-light" href="email.php"><i class="fas fa-envelope-square"></i>&nbsp;E-mail&nbsp;<span class="badge badge-primary contEmail">0</span><span class="sr-only">(current)</span></a>
+                                    <a class="nav-link text-light" href="email.php"><i class="fas fa-envelope-square"></i>&nbsp;E-mail&nbsp;<span class="badge badge-primary contEmail"><?=$_SESSION["qtdEmails"]?></span><span class="sr-only">(current)</span></a>
                                 </li>                                                                
                                 <li class="nav-item active">
                                     <a class="nav-link text-light" href="pendencias.php"><span class=""><i class="fas fa-exclamation-triangle"></i></span>&nbsp;Pendências&nbsp;<span class="badge badge-primary">0</span><span class="sr-only">(current)</span></a>
@@ -66,9 +66,9 @@
             <div class="row">            
                 <div class="col-md-12">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="inicio.html">Inicio</a></li>
-                        <li class="breadcrumb-item"><a href="arquivos.html">Arquivos</a></li>
-                        <li class="breadcrumb-item"><a href="email.html">E-mail</a></li>
+                        <li class="breadcrumb-item"><a href="inicio.php">Inicio</a></li>
+                        <li class="breadcrumb-item"><a href="arquivos.php">Arquivos</a></li>
+                        <li class="breadcrumb-item"><a href="email.php">E-mail</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Pendências</li>
                     </ol>                    
                 </div>

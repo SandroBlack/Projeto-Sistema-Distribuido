@@ -1,11 +1,14 @@
 <?php
-	if(!isset($_SESSION)){
+	
+    if(!isset($_SESSION["logado"])){
         session_start();
+        //session_destroy();
+        //header("Location:../index.html");
     }
 ?>
 
 <!doctype html>
-<html lang="br">
+<html lang="pt-BR">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -39,7 +42,7 @@
                                     <a class="nav-link text-light" href="arquivos.php"><i class="fas fa-file-alt"></i>&nbsp;Arquivos<span class="sr-only">(current)</span></a>
                                 </li>                                                                
                                 <li class="nav-item active">
-                                    <a class="nav-link text-light" href="email.php"><i class="fas fa-envelope-square"></i>&nbsp;E-mail&nbsp;<span class="badge badge-primary contEmail">0</span><span class="sr-only">(current)</span></a>
+                                    <a class="nav-link text-light" href="email.php"><i class="fas fa-envelope-square"></i>&nbsp;E-mail&nbsp;<span class="badge badge-primary contEmail"><?=$_SESSION["qtdEmails"]?></span><span class="sr-only">(current)</span></a>
                                 </li>                                                                
                                 <li class="nav-item">
                                     <a class="nav-link text-light" href="pendencias.php"><i class="fas fa-exclamation-triangle"></i>&nbsp;Pendências&nbsp;<span class="badge badge-primary">0</span><span class="sr-only">(current)</span></a>
@@ -64,8 +67,8 @@
             <div class="row">            
                 <div class="col-md-12">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="inicio.html">Inicio</a></li>
-                        <li class="breadcrumb-item"><a href="arquivos.html">Arquivos</a></li>
+                        <li class="breadcrumb-item"><a href="inicio.php">Inicio</a></li>
+                        <li class="breadcrumb-item"><a href="arquivos.php">Arquivos</a></li>
                         <li class="breadcrumb-item active" aria-current="page">E-mail</li>
                     </ol>                    
                 </div>
@@ -112,7 +115,7 @@
 
                         <!-- Enviados -->
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">                            
-                            <table class="table table-sm table-hover text-center">
+                            <table class="table table-sm table-hover text-center" id="tblCaixaSaida">
                                 <thead>
                                     <tr class="text-dark bg-light">
                                         <th scope="col">Nº</th>
@@ -148,9 +151,12 @@
                             </div>
                             <div class="modal-body">
                                 <form class="" id="formNovoEmail">
-                                    <div class="form-group">
-                                            <label for="exampleInputPara">Para:</label>                
-                                        <input type="text" class="form-control" name="novoEmailPara" id="novoEmailPara" placeholder="Para" required>        
+                                    <div class="form-group" id="novoEmailGrupo">
+                                        <label for="exampleInputPara">Para:</label>                
+                                        <input type="text" class="form-control" name="novoEmailPara" id="novoEmailPara" placeholder="Para" required>                                       
+                                        <!-- <select class="custom-select" name="novoEmailPara" id="novoEmailPara">
+                                            <option value=""></option>
+                                        </select>        -->
                                     </div>
                                     <div class="form-group">
                                             <label for="exampleInputAssunto">Assunto:</label>                

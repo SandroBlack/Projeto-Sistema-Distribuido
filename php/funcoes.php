@@ -1,24 +1,39 @@
 <?php
-include_once("dbConexao.php");
-if(!isset($_SESSION)){
-    session_start();
+	
+	include_once("dbConexao.php");
+	if(!isset($_SESSION)){
+		session_start();
+	//session_destroy();
+	//header("Location:../index.html");	
 }
 
 /* DIRECIONAMENTO DAS FUNÇÕES */
-$funcao = $_POST["funcao"];
+@$funcao = $_POST["funcao"];
 switch($funcao){
     case "login":
         login();
-        break;
+		break;
+	case "sair":
+		sair();
+		break;	
 	case "cadastro":
 		cadastrar();
 		break;
-	case "consultaEmail":
-		consultaEmail();
+	case "consultaEmailRecebido":
+		consultaEmailRecebido();
 		break;
+	case "consultaEmailEnviado":
+		consultaEmailEnviado();
+		break;	
 	case "enviarEmail":
 		enviarEmail();
 		break;
+	case "lerEmail":
+		lerEmail();
+		break;
+	case "contarEmailNaoLido":
+		contarEmailNaoLido();
+		break;			
 	case "pesquisarUser":
 		pesquisarUser();
 		break;
@@ -51,6 +66,7 @@ function login(){
 				echo "Inativo";
 				return 0;
 			} else if(password_verify($senha, $dados["senha"])){	
+				$_SESSION["logado"] = true;
 				$_SESSION["idUsuario"] = $dados["pk_usuario"]; 
 				$_SESSION["nomeUsuario"] = $dados["nome"]; 
 				echo "1";
@@ -65,6 +81,13 @@ function login(){
 		}
 	} catch(PDOException $erro){
 		echo "Erro: " . $erro->getMessage() . "<br>";
+	}
+}
+
+// Sair e Destruir a Sessão
+function sair(){
+	if(isset($_SESSION["logado"])){
+		session_destroy();
 	}
 }
 
@@ -151,7 +174,7 @@ function pesquisarUser(){
 	
 	try{
 		$pdo = conectar();
-		$sql = "SELECT nome FROM usuario WHERE nome LIKE '$texto%'";
+		$sql = "SELECT pk_usuario, nome FROM usuario WHERE nome LIKE '$texto%'";
 		$stm = $pdo->prepare($sql);
 		//$stm->bindValue(":nome", $texto);
 		$stm->execute();
@@ -164,22 +187,60 @@ function pesquisarUser(){
 }
 
 // Relacionar E-mails
-function consultaEmail(){
-	$idUsuario = $_SESSION["idUsuario"];
+function consultaEmailRecebido(){
+	@$idUsuario = $_SESSION["idUsuario"];
 
 	try{
 		$pdo = conectar();
-		$sql = "SELECT a.nome, b.pk_email, b.assunto, c.data_mensagem, c.situacao 
-				FROM usuario a
-				INNER JOIN email b ON a.pk_usuario = b.fk_usuario_email_para
-				INNER JOIN mensagem c ON c.fk_email_mensagem = b.pk_email 
-				WHERE a.pk_usuario = :idUsuario";
+		$sql = "SELECT a.nome, c.pk_email, c.assunto, b.data_mensagem, b.situacao 
+				FROM usuario a				 
+				INNER JOIN mensagem b ON b.FK_USUARIO_MENSAGEM = a.pk_usuario
+				INNER JOIN email c ON c.PK_EMAIL = b.FK_EMAIL_MENSAGEM
+				WHERE c.FK_USUARIO_EMAIL_PARA = :idUsuario";				
 		$stm = $pdo->prepare($sql);
 		$stm->bindValue(":idUsuario", $idUsuario);		
 		$stm->execute();
-		$dados = $stm->fetchAll(PDO::FETCH_ASSOC);		
+		$dados = $stm->fetchAll(PDO::FETCH_ASSOC);				
+		echo json_encode($dados);			
+		
+	} catch(PDOException $erro){
+		echo "Erro: " . $erro->getMessage() . "<br>";
+	}
+}
+
+function consultaEmailEnviado(){
+	try{
+		$pdo = conectar();
+		$sql = "SELECT a.nome, b.pk_email, b.assunto, c.data_mensagem 
+				FROM usuario a
+				INNER JOIN email b ON a.pk_usuario = b.fk_usuario_email_para
+				INNER JOIN mensagem c ON c.fk_email_mensagem = b.pk_email 
+				WHERE b.fk_usuario_email_de = :de";
+		$stm = $pdo->prepare($sql);
+		$stm->bindValue(":de", $_SESSION["idUsuario"]);		
+		$stm->execute();
+		$dados = $stm->fetchAll(PDO::FETCH_ASSOC);			
 		echo json_encode($dados);
 		
+	} catch(PDOException $erro){
+		echo "Erro: " . $erro->getMessage() . "<br>";
+	}
+}
+
+// Contar Emails não Lidos
+function contarEmailNaoLido(){
+	$idUsuario = $_SESSION["idUsuario"];
+	try{
+		$pdo = conectar();
+		$sql = "SELECT COUNT(conteudo) AS qtd
+				FROM mensagem 
+				WHERE situacao = 0
+				AND fk_usuario_mensagem = $idUsuario";				
+		$stm = $pdo->prepare($sql);				
+		$stm->execute();
+		$dados = $stm->fetch(PDO::FETCH_ASSOC);
+		$_SESSION["qtdEmails"] = $dados["qtd"];				
+				
 	} catch(PDOException $erro){
 		echo "Erro: " . $erro->getMessage() . "<br>";
 	}
@@ -191,67 +252,98 @@ function enviarEmail(){
 	
 	if($acao == "novoEmail"){
 		parse_str($_POST["dados"], $dados);
-		$de = $_SESSION["idUsuario"];	
-		$para = $dados["novoEmailPara"];
+		$de = intval($_SESSION["idUsuario"]);	
+		$para = intval($dados["novoEmailPara"]);
 		$assunto = $dados["novoEmailAssunto"];
-		$mensagem = $dados["novoEmailMensagem"];
-			
+		$mensagem = $dados["novoEmailMensagem"];		
+		
 		try{
 			$pdo = conectar();
-			$sql = "INSERT INTO email VALUES(:assunto, :de, :para)";
+			$sql = "INSERT INTO email(assunto, fk_usuario_email_de, fk_usuario_email_para) VALUES(:assunto, :de, :para)";
 			$stm = $pdo->prepare($sql);
 			$stm->bindValue(":assunto", $assunto);
-			$stm->bindValue(":de",$de);
+			$stm->bindValue(":de", $de);
 			$stm->bindValue(":para", $para);
 			$stm->execute();
-			$idEmail = last_insert_id();	
-			conteudoEmail($para, $mensagem, $idEmail);
-			//echo "1";
-			
+			$idEmail = $pdo->lastInsertId();	
+			conteudoEmail($de, $idEmail, $mensagem);
+						
 		} catch(PDOException $erro){
 			echo "Erro: " . $erro->getMessage() . "<br>";
 		}
 		
 	} else if($acao == "resposta"){
-		$idEmail = $_POST["?"]; // Tem pegar o id da mensagem clicada e respondida.
+		$idEmail = intval($_POST["idResposta"]); // Tem pegar o id da mensagem clicada e respondida.
 		$mensagem = $_POST["mensagem"];
-		$de = $_SESSION["nomeUsuario"];
+		$de = $_SESSION["idUsuario"];
 		
 		try{
 			$pdo = conectar();
-			$sql = "SELECT assunto, fk_usuario_mensagem FROM email WHERE pk_email = :idEmail)";
+			$sql = "SELECT assunto, fk_usuario_email_de FROM email WHERE pk_email = :idEmail";
 			$stm = $pdo->prepare($sql);
 			$stm->bindValue(":idEmail", $idEmail);			
 			$stm->execute();			
 			$dados = $stm->fetch(PDO::FETCH_ASSOC);			
-			$assunto = $dados["assunto"];
-			$para = $dados["fk_usuario_mensagem"];
-						
-			$sql2 = "INSERT INTO email VALUES(:assunto, :de, :para)";
-			$stm2 = $pdo->prepare($sql);
+			$assunto = "Re: " . $dados["assunto"];
+			$para = intval($dados["fk_usuario_email_de"]);
+							
+			$sql2 = "INSERT INTO email(assunto, fk_usuario_email_de, fk_usuario_email_para) VALUES(:assunto, :de, :para)";
+			$stm2 = $pdo->prepare($sql2);
 			$stm2->bindValue(":assunto", $assunto);
-			$stm2->bindValue(":de",$de);
+			$stm2->bindValue(":de", $de);
 			$stm2->bindValue(":para", $para);
-			$stm2->execute();			
-			conteudoEmail($de, $mensagem, $idEmail);
+			$stm2->execute();
+			$idEmail2 = $pdo->lastInsertId();			
+			conteudoEmail($de, $idEmail2, $mensagem);
 			
 		} catch(PDOException $erro){
 			echo "Erro: " . $erro->getMessage() . "<br>";
-		}	
+		}
 	}
 }
 
 // Mensagem
-function conteudoEmail($de, $mensagem, $idEmail){	
+function conteudoEmail($de, $para, $mensagem){	
 		
 	try{
-		$sql = "INSERT INTO mensagem VALUES(:conteudo, :de) WHERE fk_email_mensagem = :idEmail";
+		$pdo = conectar();
+		$sql = "INSERT INTO mensagem(conteudo, fk_email_mensagem, fk_usuario_mensagem) VALUES(:conteudo, :idEmail, :de)";
 		$stm = $pdo->prepare($sql);
 		$stm->bindValue(":conteudo", $mensagem);
-		$stm->bindValue(":idEmail", $idEmail);
 		$stm->bindValue(":de", $de);
-		$stm->execute();
+		$stm->bindValue(":idEmail", $para);
+		$stm->execute();		
 		echo "1";
+
+	} catch(PDOException $erro){
+		echo "Erro: " . $erro->getMessage() . "<br>";
+	}
+}
+
+// Leitura de E-mails
+function lerEmail(){
+	if($_POST["acao"] == "recebido"){
+		$sql = "SELECT a.nome, c.assunto, b.conteudo, b.data_mensagem, b.situacao 
+				FROM usuario a				 
+				INNER JOIN mensagem b ON b.FK_USUARIO_MENSAGEM = a.pk_usuario
+				INNER JOIN email c ON c.PK_EMAIL = b.FK_EMAIL_MENSAGEM
+				WHERE c.FK_USUARIO_EMAIL_PARA = :quem";
+	} else{
+		$sql = "SELECT a.nome, c.assunto, b.conteudo, b.data_mensagem, b.situacao 
+				FROM usuario a				 
+				INNER JOIN mensagem b ON b.FK_USUARIO_MENSAGEM = a.pk_usuario
+				INNER JOIN email c ON c.PK_EMAIL = b.FK_EMAIL_MENSAGEM
+				WHERE c.FK_USUARIO_EMAIL_DE = :quem";
+	}
+
+	try{
+		$pdo = conectar();		
+		$stm = $pdo->prepare($sql);
+		$stm->bindValue(":quem", $_SESSION["idUsuario"]);		
+		$stm->execute();
+		$dados = $stm->fetch(PDO::FETCH_ASSOC);	
+		echo json_encode($dados);	
+		//echo "1";			
 
 	} catch(PDOException $erro){
 		echo "Erro: " . $erro->getMessage() . "<br>";

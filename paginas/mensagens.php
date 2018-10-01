@@ -39,7 +39,7 @@
                                     <a class="nav-link text-light" href="arquivos.html">Arquivos<span class="sr-only">(current)</span></a>
                                 </li>                                                                
                                 <li class="nav-item active">
-                                    <a class="nav-link text-light" href="#"><i class="far fa-comments"></i>&nbsp;Mensagens&nbsp;<span class="badge badge-primary">0</span><span class="sr-only">(current)</span></a>
+                                    <a class="nav-link text-light" href="#"><i class="far fa-comments"></i>&nbsp;Mensagens&nbsp;<span class="badge badge-primary"><?=$_SESSION["qtdEmails"]?></span><span class="sr-only">(current)</span></a>
                                 </li>                                                                
                                 <li class="nav-item">
                                     <a class="nav-link text-light" href="pendencias.html">Pendências&nbsp;<span class="badge badge-primary">0</span><span class="sr-only">(current)</span></a>
@@ -64,8 +64,8 @@
             <div class="row">            
                 <div class="col-md-12">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="inicio.html">Inicio</a></li>
-                        <li class="breadcrumb-item"><a href="arquivos.html">Arquivos</a></li>
+                        <li class="breadcrumb-item"><a href="inicio.php">Inicio</a></li>
+                        <li class="breadcrumb-item"><a href="arquivos.php">Arquivos</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Mensagens</li>
                     </ol>                    
                 </div>
