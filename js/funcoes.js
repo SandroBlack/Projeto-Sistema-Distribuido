@@ -40,13 +40,12 @@ $(document).ready(function(){
             dataType:'html',
             success:function(retorno){
                 console.log(retorno);
+				
                 if (retorno == '0'){
 					alert('Favor Preencher todos os Campos!')					
-                }
-                else if(retorno == 'Inativo'){
+                } else if(retorno == 'Inativo'){
                     alert('Conta Inativa, Favor Verificar seu E-mail de Cadastro!');
-                }
-				else if(retorno == '1') {
+                } else if(retorno == '1') {
                     location.href='paginas/inicio.php';					
 				} else if(retorno == '2'){
 					alert('Email ou Senha Invalido!');
