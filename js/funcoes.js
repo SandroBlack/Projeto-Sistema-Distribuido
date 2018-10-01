@@ -30,18 +30,16 @@ $(document).ready(function(){
     // Função de Login
     $('#btnLogin').click(function(){
         //location.href='paginas/inicio.php';          
-        var funcao = 'login';
-		var email = $('#email').val();	
-		var senha = $('#senha').val();	
-        //var dados = $('#formLogin').serialize();               
+        var funcao = 'login';		
+        var dados = $('#formLogin').serialize();               
         
         $.ajax({
             type:'post',
             url:'php/funcoes.php',
-            data: {funcao, email, senha},
+            data: {funcao, dados},
             dataType:'html',
             success:function(retorno){
-                //console.log(retorno);
+                console.log(retorno);
                 if (retorno == '0'){
 					alert('Favor Preencher todos os Campos!')					
                 }

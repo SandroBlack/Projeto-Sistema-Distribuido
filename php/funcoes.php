@@ -44,11 +44,9 @@ switch($funcao){
 
 // Função de Login
 function login(){	
-	/*parse_str($_POST["dados"], $dados);
+	parse_str($_POST["dados"], $dados);
 	$email = $dados["email"];
-	$senha = $dados["senha"];*/
-	$email = $_POST["email"];
-	$senha = $_POST["senha"];	
+	$senha = $dados["senha"];	
 	
 	if(empty($email) || empty($senha)){
 		echo "0";
