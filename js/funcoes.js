@@ -39,7 +39,7 @@ $(document).ready(function(){
             data: {funcao,dados},
             dataType:'html',
             success:function(retorno){
-                console.log(retorno);
+                //console.log(retorno);
                 if (retorno == '0'){
 					alert('Favor Preencher todos os Campos!')					
                 }
@@ -98,8 +98,7 @@ $(document).ready(function(){
                 } else if(retorno == 'cadastrado'){
                     alert('Já Existe um Cadastro com o E-mail Informado!');
                     $('#modalCadastroEmail').focus();
-                } 
-                if (retorno == '1'){
+                } else if (retorno == '1'){
                     alert('Cadastrado Realizado com Sucesso, um E-mail Será Enviado para Confirmação do seu Cadastro!');					
                     $('#formCadastro').each(function(){
                         this.reset();
@@ -247,7 +246,7 @@ $(document).ready(function(){
 		});     
 	});
     
-    // Click nas Linhas das Tabelas
+    /* Click nas Linhas das Tabelas */
     // Leitura de E-mails
     $(document).on('click','tbody tr',function(){
         // Pegando o nome da classe da linha
@@ -370,7 +369,7 @@ $(document).ready(function(){
 				dataType:'html',
 				success:function(retorno){
 					console.log(retorno);
-					
+					 window.location.reload(); 
 				},
 				failure:function(msgErro){
 					console.log(msgErro);
@@ -380,9 +379,6 @@ $(document).ready(function(){
 				}
 			});      
         });	
-        
-        // Leitura de E-mails
-
 
 		
 });		
