@@ -1,8 +1,9 @@
 <?php	
-    session_start();
+    session_start();    
+
     if(!isset($_SESSION["logado"]) || $_SESSION["logado"] != true){
         header("Location:../index.html");
-    }
+    }    
 ?>
 
 <!doctype html>
@@ -99,7 +100,7 @@
                                         <th scope="col">Data</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody>                               
                                     <!--<tr class="text-primary" data-target="#modalLerEmail" data-toggle="modal" style="cursor:pointer" id="XXX">
                                         <th scope="row">1</th>
                                         <td>Mark</td>
@@ -224,5 +225,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script src="../js/funcoes.js"></script>
+        <script src="../js/email.js"></script>
     </body>    
 </html>

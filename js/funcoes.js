@@ -39,15 +39,16 @@ $(document).ready(function(){
             data: {funcao, dados},
             dataType:'html',
             success:function(retorno){
-                console.log(retorno);
+                //console.log(retorno);                
 				
                 if (retorno == '0'){
-					alert('Favor Preencher todos os Campos!')					
-                } else if(retorno == 'Inativo'){
-                    alert('Conta Inativa, Favor Verificar seu E-mail de Cadastro!');
-                } else if(retorno == '1') {
-                    location.href='paginas/inicio.php';					
-				} else if(retorno == '2'){
+					alert('Favor Preencher todos os Campos!');					
+                } else if(retorno == '1'){
+                    alert('Conta Inativa, Favor Verificar seu E-mail de Cadastro para Realizar a Ativação!');
+                } else if(retorno == '2'){
+                    location.href='paginas/inicio.php';
+                    contarEmailNaoLido();                            				
+				} else if(retorno == '3'){
 					alert('Email ou Senha Invalido!');
 					$('#email').focus();	
 				} else{
@@ -129,84 +130,30 @@ $(document).ready(function(){
         });
     });*/    
 
-    /* PÁGINA DE EMAIL */
-	
-    // Relacionando os Emails Recebidos   
-	var funcao = 'consultaEmailRecebido';
-	
-	$.ajax({
-        type:'post',
-        url:'../php/funcoes.php',
-        data: {funcao},
-        dataType:'json',
-        success:function(retorno){
-            //console.log(retorno.length);
-            for(i = 0; i < retorno.length; i++){
-                $('#tblCaixaEntrada').append(
-                    '<tr class="text-primary recebido" data-target="#modalLerEmail" data-toggle="modal" style="cursor:pointer" id="'+ retorno[i].pk_email +'">'
-                        +'<th scope="row">'+ (i+1) +'</th>'
-                        +'<td>'+ retorno[i].nome +'</td>'
-                        +'<td>'+ retorno[i].assunto +'</td>'
-                        +'<td>'+ retorno[i].data_mensagem +'</td>'
-                    +'</tr>');
-            }    	
-        },
-        failure:function(msgErro){
-            console.log(msgErro);
-        },
-        error:function(erro){
-            console.log(erro);
-        }
-    }); 
-    
-    // Relacionando os Emails Enviados  
-	var funcao = 'consultaEmailEnviado';
-	
-	$.ajax({
-        type:'post',
-        url:'../php/funcoes.php',
-        data: {funcao},
-        dataType:'json',
-        success:function(retorno){
-            //console.log(retorno.length);
-            for(i = 0; i < retorno.length; i++){
-                $('#tblCaixaSaida').append(
-                    '<tr class="text-secondary enviado" data-target="#modalLerEmail" data-toggle="modal" style="cursor:pointer" id="'+ retorno[i].pk_email +'">'
-                        +'<th scope="row">'+ (i+1) +'</th>'
-                        +'<td>'+ retorno[i].nome +'</td>'
-                        +'<td>'+ retorno[i].assunto +'</td>'
-                        +'<td>'+ retorno[i].data_mensagem +'</td>'
-                    +'</tr>');
-            }    	
-        },
-        failure:function(msgErro){
-            console.log(msgErro);
-        },
-        error:function(erro){
-            console.log(erro);
-        }
-    });    
+    /* PÁGINA DE EMAIL */   
     
     // Contar E-mails não Lidos
-    var funcao = 'contarEmailNaoLido';
+    function contarEmailNaoLido(){
+        var funcao = 'contarEmailNaoLido';
 
-    $.ajax({
-        type:'post',
-        url:'../php/funcoes.php',
-        data: {funcao},
-        dataType:'html',
-        success:function(retorno){
-            //console.log(retorno);                           	
-        },
-        failure:function(msgErro){
-            console.log(msgErro);
-        },
-        error:function(erro){
-            console.log(erro);
-        }
-    });    
+        $.ajax({
+            type:'post',
+            url:'../php/funcoes.php',
+            data: {funcao},
+            dataType:'html',
+            success:function(retorno){
+                //console.log(retorno);                           	
+            },
+            failure:function(msgErro){
+                console.log(msgErro);
+            },
+            error:function(erro){
+                console.log(erro);
+            }
+        });  
+    }  
 
-    $('#modalLerEmail').on('hidden.bs.modal', function () {
+    $('#modalLerEmail').on('hidden.bs.modal', function (){
         $('#fecharModalLeitura').click();
     });
 	
@@ -263,7 +210,7 @@ $(document).ready(function(){
         $.ajax({
 			type:'post',
 			url:'../php/funcoes.php',
-			data: {funcao, acao},
+			data: {funcao, acao, idEmail},
 			dataType:'json',
 			success:function(retorno){
                 //console.log(retorno);            
@@ -328,56 +275,56 @@ $(document).ready(function(){
     });	
 	
 	// Enviar E-mail
-		$('#btnNovoEmail').click(function(){			
-			var funcao = 'enviarEmail';
-			var acao = 'novoEmail';
-			var dados = $('#formNovoEmail').serialize();
+    $('#btnNovoEmail').click(function(){			
+        var funcao = 'enviarEmail';
+        var acao = 'novoEmail';
+        var dados = $('#formNovoEmail').serialize();
+    
+        $.ajax({
+            type:'post',
+            url:'../php/funcoes.php',
+            data: {funcao, acao, dados},
+            dataType:'html',
+            success:function(retorno){
+                //console.log(retorno);
+                if(retorno == '1'){
+                    alert('Mesagem Enviada com Sucesso.');
+                    window.location.reload();                        
+                }
+            },
+            failure:function(msgErro){
+                console.log(msgErro);
+            },
+            error:function(erro){
+                console.log(erro);
+            }
+        });   
+    });
 		
-			$.ajax({
-				type:'post',
-				url:'../php/funcoes.php',
-				data: {funcao, acao, dados},
-				dataType:'html',
-				success:function(retorno){
-					console.log(retorno);
-					if(retorno == '1'){
-                        alert('Mesagem Enviada com Sucesso.');
-                        window.location.reload();                        
-					}
-				},
-				failure:function(msgErro){
-					console.log(msgErro);
-				},
-				error:function(erro){
-					console.log(erro);
-				}
-			});   
-		});
-		
-		// Enviar E-mail Resposta
-		$('#btnEnviarResposta').click(function(){
-            var funcao = 'enviarEmail';
-			var acao = 'resposta';
-            var idResposta = idEmail;
-			var mensagem = $('#modalLeituraMensagemResposta').val();
-			
-			$.ajax({
-				type:'post',
-				url:'../php/funcoes.php',
-				data: {funcao, acao, idResposta, mensagem},
-				dataType:'html',
-				success:function(retorno){
-					console.log(retorno);
-					 window.location.reload(); 
-				},
-				failure:function(msgErro){
-					console.log(msgErro);
-				},
-				error:function(erro){
-					console.log(erro);
-				}
-			});      
-        });	
+    // Enviar E-mail Resposta
+    $('#btnEnviarResposta').click(function(){
+        var funcao = 'enviarEmail';
+        var acao = 'resposta';
+        var idResposta = idEmail;
+        var mensagem = $('#modalLeituraMensagemResposta').val();
+        
+        $.ajax({
+            type:'post',
+            url:'../php/funcoes.php',
+            data: {funcao, acao, idResposta, mensagem},
+            dataType:'html',
+            success:function(retorno){
+                //console.log(retorno);
+                    window.location.reload(); 
+            },
+            failure:function(msgErro){
+                console.log(msgErro);
+            },
+            error:function(erro){
+                console.log(erro);
+            }
+        });      
+    });	
 
 		
 });		

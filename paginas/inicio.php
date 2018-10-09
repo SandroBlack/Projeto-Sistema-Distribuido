@@ -41,7 +41,7 @@
                                     <a class="nav-link text-light" href="arquivos.php"><i class="fas fa-file-alt"></i>&nbsp;Arquivos<span class="sr-only">(current)</span></a>
                                 </li>                                                                
                                 <li class="nav-item">
-                                    <a class="nav-link text-light" href="email.php"><i class="fas fa-envelope-square"></i>&nbsp;E-mail&nbsp;<span class="badge badge-primary contEmail"><?=$_SESSION["qtdEmails"]?></span><span class="sr-only">(current)</span></a>
+                                    <a class="nav-link text-light" href="email.php" id="pgEmail"><i class="fas fa-envelope-square"></i>&nbsp;E-mail&nbsp;<span class="badge badge-primary contEmail"><?=$_SESSION["qtdEmails"]?></span><span class="sr-only">(current)</span></a>
                                 </li>                                                                
                                 <li class="nav-item">
                                     <a class="nav-link text-light" href="pendencias.php"><i class="fas fa-exclamation-triangle"></i>&nbsp;Pendências&nbsp;<span class="badge badge-primary">0</span><span class="sr-only">(current)</span></a>

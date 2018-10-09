@@ -51,36 +51,37 @@ function login(){
 	if(empty($email) || empty($senha)){
 		echo "0";
 		return 0;
-	}	
+	} else{	
 
-	try{
-		$pdo = conectar();
-		$sql = "SELECT pk_usuario, nome, email, senha, situacao FROM usuario WHERE email = :email";
-		$stm = $pdo->prepare($sql);
-		$stm->bindValue(":email", $email); 	 
-		$stm->execute();
-		$dados = $stm->fetch(PDO::FETCH_ASSOC);
-		
-		if ($stm->rowCount() == 1){									
-			if($dados["situacao"] == 0){
-				echo "Inativo";
+		try{
+			$pdo = conectar();
+			$sql = "SELECT pk_usuario, nome, email, senha, situacao FROM usuario WHERE email = :email";
+			$stm = $pdo->prepare($sql);
+			$stm->bindValue(":email", $email); 	 
+			$stm->execute();
+			$dados = $stm->fetch(PDO::FETCH_ASSOC);
+			
+			if ($stm->rowCount() == 1){									
+				if($dados["situacao"] == 0){
+					echo "1";
+					return 0;
+				} else if(password_verify($senha, $dados["senha"])){	
+					$_SESSION["logado"] = true;
+					$_SESSION["idUsuario"] = $dados["pk_usuario"]; 
+					$_SESSION["nomeUsuario"] = $dados["nome"]; 
+					echo "2";
+					return 0;
+				} else{
+					echo "3";
+					return 0;
+				}			 
+			} else{	
+				echo "4";
 				return 0;
-			} else if(password_verify($senha, $dados["senha"])){	
-				$_SESSION["logado"] = true;
-				$_SESSION["idUsuario"] = $dados["pk_usuario"]; 
-				$_SESSION["nomeUsuario"] = $dados["nome"]; 
-				echo "1";
-				return 0;
-			} else{
-				echo "2";
-				return 0;
-			}			 
-		} else{	
-			echo "3";
-			return 0;
+			}
+		} catch(PDOException $erro){
+			echo "Erro: " . $erro->getMessage() . "<br>";
 		}
-	} catch(PDOException $erro){
-		echo "Erro: " . $erro->getMessage() . "<br>";
 	}
 }
 
@@ -236,10 +237,11 @@ function contarEmailNaoLido(){
 	
 	try{
 		$pdo = conectar();
-		$sql = "SELECT conteudo
-				FROM mensagem 
-				WHERE situacao = 0
-				AND fk_usuario_mensagem = $idUsuario";				
+		$sql = "SELECT *
+		FROM mensagem a
+		INNER JOIN email b ON a.FK_EMAIL_MENSAGEM = b.PK_EMAIL 
+		WHERE a.SITUACAO = 0 
+		AND b.FK_USUARIO_EMAIL_PARA = $idUsuario";				
 		$stm = $pdo->prepare($sql);				
 		$stm->execute();
 		$dados = $stm->fetch(PDO::FETCH_ASSOC);
@@ -270,7 +272,7 @@ function enviarEmail(){
 			$stm->bindValue(":para", $para);
 			$stm->execute();
 			$idEmail = $pdo->lastInsertId();	
-			conteudoEmail($de, $idEmail, $mensagem);
+			conteudoEmail($de, $idEmail, $mensagem, 0);
 						
 		} catch(PDOException $erro){
 			echo "Erro: " . $erro->getMessage() . "<br>";
@@ -298,7 +300,7 @@ function enviarEmail(){
 			$stm2->bindValue(":para", $para);
 			$stm2->execute();
 			$idEmail2 = $pdo->lastInsertId();			
-			conteudoEmail($de, $idEmail2, $mensagem);
+			conteudoEmail($de, $idEmail2, $mensagem, 0);
 			
 		} catch(PDOException $erro){
 			echo "Erro: " . $erro->getMessage() . "<br>";
@@ -307,13 +309,14 @@ function enviarEmail(){
 }
 
 // Mensagem
-function conteudoEmail($de, $para, $mensagem){	
+function conteudoEmail($de, $para, $mensagem, $situacao){	
 		
 	try{
 		$pdo = conectar();
-		$sql = "INSERT INTO mensagem(conteudo, fk_email_mensagem, fk_usuario_mensagem) VALUES(:conteudo, :idEmail, :de)";
+		$sql = "INSERT INTO mensagem(conteudo, situacao, fk_email_mensagem, fk_usuario_mensagem) VALUES(:conteudo, :situacao, :idEmail, :de)";
 		$stm = $pdo->prepare($sql);
 		$stm->bindValue(":conteudo", $mensagem);
+		$stm->bindValue(":situacao", $situacao);
 		$stm->bindValue(":de", $de);
 		$stm->bindValue(":idEmail", $para);
 		$stm->execute();		
@@ -326,6 +329,8 @@ function conteudoEmail($de, $para, $mensagem){
 
 // Leitura de E-mails
 function lerEmail(){
+	$idEmail = $_POST["idEmail"];
+
 	if($_POST["acao"] == "recebido"){
 		$sql = "SELECT a.nome, c.assunto, b.conteudo, b.data_mensagem, b.situacao 
 				FROM usuario a				 
