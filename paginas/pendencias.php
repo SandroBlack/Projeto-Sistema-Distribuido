@@ -84,18 +84,22 @@
                         <thead class="text-dark text-dark bg-light">
                             <tr>
                                 <th scope="col">Nº</th>
-                                <th scope="col">Data recebimento</th>
-                                <th scope="col">Pendência</th>
+                                <th scope="col">Título</th>
+                                <th scope="col">Data</th>
+                                <th scope="col">Descrição</th>
                                 <th scope="col">Data limite</th>
+                                <th scope="col">Situação</th>
                                 <th scope="col">#</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <th class="text-dark" scope="row">1</th>
+                                <td>Requisição 01</td>
                                 <td>01/08/2018</td>
                                 <td>Pendência 01</td>
                                 <td>05/08/2018</td>
+                                <td>Pendente</td>
                                 <td><button type="button" class="btn btn-primary btn-sm" id="reselverPendencia">Resolver</button></td>
                             </tr>              
                         </tbody>

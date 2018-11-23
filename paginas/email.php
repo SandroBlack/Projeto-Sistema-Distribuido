@@ -79,6 +79,8 @@
                     <h3 class="d-inline text-dark"><i class="fas fa-envelope-square"></i>&nbsp;E-mail</h3>
                     <button class="btn btn-primary float-right mr-3" type="button" data-toggle="modal" data-target="#modalNovoEmail"><i class="fas fa-edit"></i>&nbsp;Novo</button>
                     <hr> 
+                    
+                    <!-- Abas -->
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item">
                               <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Caixa de Entrada</a>
@@ -88,9 +90,9 @@
                             </li>                            
                     </ul>
                     <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab"> 
-                            
-                            <!-- Caixa de Entrada -->
+
+                        <!-- Caixa de Entrada -->
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">                           
                             <table class="table table-sm table-hover text-center tblEmailEntrada" id="tblCaixaEntrada">
                                 <thead>
                                     <tr class="text-dark bg-light">
@@ -133,7 +135,8 @@
                                     
                                 </tbody>
                             </table>
-                        </div>                       
+                        </div> 
+                                              
                     </div>                    
                 </div>
             </div> <!-- FIM DO CONTEÚDO --> 

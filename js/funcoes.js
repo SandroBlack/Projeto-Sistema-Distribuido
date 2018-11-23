@@ -180,7 +180,7 @@ $(document).ready(function(){
                         '<ul>'
                             +'<li><a href="#">'+ retorno.pk_usuario + ' - ' + retorno.nome +'</a></li>'    
                        +'</ul>');
-                //}
+                //}                
                 }  				
 			},
 			failure:function(msgErro){

@@ -74,48 +74,144 @@
             </div> 
 
             <!-- CONTEÚDO -->
-            <div class="row">            
+            <div class="row">     
                 <div class="col-md-12">
-                   <h3 class="text-dark"><i class="fas fa-file-alt"></i>&nbsp;Arquivos</h3>
-                   <hr>
-                   <small id="emailHelp" class="form-text text-muted">Escolha o usuário a extensão e o tamanho maxímo do arquio.</small>         <hr>         
-                   <form class="" id="formRequisitar">
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Usuário</label>
-                            <input type="search" class="form-control" id="pesquisaUsuarioArquivo" placeholder="Pesquisar usuário" required>                   
+                    <h3 class="d-inline text-dark"><i class="fas fa-file-alt"></i>&nbsp;Arquivos</h3>         
+                    <button class="btn btn-primary float-right mr-3" type="button" data-toggle="modal" data-target="#modalNovaRequisicao"><i class="fas fa-plus-circle"></i>&nbsp;Nova</button><hr> 
+
+                    <!-- Abas -->
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Minhas Requisições</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Requisições Aceitas</a>
+                        </li>                            
+                    </ul> 
+                     
+                    <!-- Conteúdo das Abas -->
+                    <div class="tab-content" id="myTabContent">                                      
+        
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <table class="table table-sm table-hover text-center tblEmailEntrada" id="tblCaixaEntrada">
+                                <thead>
+                                    <tr class="text-dark bg-light">
+                                            <th scope="col">Data</th>                                            
+                                            <th scope="col">Descrição</th>
+                                            <th scope="col">Extenção</th>
+                                            <th scope="col">Prazo</th>                                           
+                                            <th scope="col">Situação</th>                                           
+                                        </tr>
+                                    </thead>
+                                    <tbody>                               
+                                        <!--<tr class="text-primary" data-target="#modalLerEmail" data-toggle="modal" style="cursor:pointer" id="XXX">
+                                            <th scope="row">1</th>
+                                            <td>Mark</td>
+                                            <td>Assunto Recebido 01</td>
+                                            <td>22/08/2018</td>
+                                        </tr>-->
+                                        
+                                </tbody>    
+                            </table>
                         </div>
-                        <label for="exampleInputEmail1">Extensão do Arquivo</label>
-                        <select class="form-control mb-3" id="selectFormato">
-                            <option>Selecione</option>
-                            <option>.DOC</option>
-                            <option>.PDF</option>
-                            <option>.TXT</option>
-                            <option>.XLS</option>
-                        </select>
-                        <div class="form-group">
-                        <label for="exampleInputTamanho">Tamanho Maxímo do Arquivo</label><br>                       
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="radio1mb" value="1mb">
-                            <label class="form-check-label" for="inlineRadio1">1 MB</label>
+
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">  
+                            <table class="table table-sm table-hover text-center tblEmailEntrada" id="tblCaixaEntrada">
+                                <thead>
+                                <tr class="text-dark bg-light">
+                                        <th scope="col">Data</th>
+                                        <th scope="col">Usuário</th>
+                                        <th scope="col">Descrição</th>
+                                        <th scope="col">Prazo</th>
+                                        <th scope="col">Situação</th>
+                                    </tr>
+                                </thead>
+                                <tbody>                               
+                                    <!--<tr class="text-primary" data-target="#modalLerEmail" data-toggle="modal" style="cursor:pointer" id="XXX">
+                                        <th scope="row">1</th>
+                                        <td>Mark</td>
+                                        <td>Assunto Recebido 01</td>
+                                        <td>22/08/2018</td>
+                                    </tr>-->
+                                    
+                                </tbody>    
+                            </table>                
+                        </div> 
+
+                    </div> <!-- Fim Conteúdo das Abas -->
+                </div>                 
+
+            </div> <!-- FIM CONTEÚDO -->  
+
+            <!-- Modal Nova Requisição -->
+            <div class="modal fade" id="modalNovaRequisicao" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel"><span class="text-primary"><i class="fas fa-file-alt"></i></span>&nbsp;Nova Requisição de Arquivo</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="radio3mb" value="3mb">
-                            <label class="form-check-label" for="inlineRadio1">3 MB</label>
+                        <div class="modal-body">
+                           
+                        <small id="emailHelp" class="form-text text-muted">Escolha o usuário, extensão, tamanho maxímo e o prazo de entrega do arquivo.</small><hr>  
+                        <form class="" id="formRequisitar">
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Usuário</label>
+                                <input type="search" class="form-control" id="pesquisaUsuarioArquivo" placeholder="Pesquisar usuário" required>   
+                            </div>
+                            <div class="form-group">
+                                <label for="descricaoArquivo">Descrição</label>
+                                <textarea type="text" class="form-control" id="descricaoArquivo" placeholder="Descrição" style="resize:none" required></textarea>   
+                            </div>    
+                            <label for="exampleInputEmail1">Extensão do Arquivo</label>
+                            <select class="form-control mb-3" id="selectFormato">
+                                <option>Selecione</option>
+                                <option>.DOCX</option>
+                                <option>.JPEG</option>
+                                <option>.PDF</option>
+                                <option>.TXT</option>
+                                <option>.XLSX</option>
+                            </select>
+                            
+                            <div class="form-group">
+                                <label for="exampleInputTamanho">Tamanho Maxímo do Arquivo</label><br>                       
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="radio1mb" value="1mb">
+                                    <label class="form-check-label" for="inlineRadio1">1 MB</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="radio3mb" value="3mb">
+                                    <label class="form-check-label" for="inlineRadio1">3 MB</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="radio5mb" value="5mb">
+                                    <label class="form-check-label" for="inlineRadio1">5 MB</label>
+                                </div>
+                                <div class="form-check form-check-inline mb-3">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="radio5mb" value="5mb">
+                                    <label class="form-check-label" for="inlineRadio1">10 MB</label>
+                                </div>
+                                <div class="form-group">
+                                <label for="prazo">Prazo para Entraga</label>
+                                    <input class="form-control" name="prazo" id="prazo" type="date">
+                                </div>
+                                <hr>                                
+                            </div>
+                        </form>
+                                      
                         </div>
-                        <div class="form-check form-check-inline mb-3">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="radio5mb" value="5mb">
-                            <label class="form-check-label" for="inlineRadio1">5 MB</label>
-                        </div>
-                        <hr>
-                        <div>
+                        <div class="modal-footer">
+                            <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button> -->
                             <button type="button" class="btn btn-primary mt-3" id="btnRequisitar"><i class="fas fa-exchange-alt"></i>&nbsp;Requisitar</button>
                         </div>
+                            
                     </div>
-                  </form>                   
                 </div>
-            </div> <!-- FIM CONTEÚDO -->                       
+            </div> <!-- Fim Modal Nova Requisição -->
 
-        </div>
+        </div> <!-- Fim Container -->
 
 
 
