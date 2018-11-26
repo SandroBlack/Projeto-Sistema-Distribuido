@@ -77,15 +77,17 @@
             <div class="row">     
                 <div class="col-md-12">
                     <h3 class="d-inline text-dark"><i class="fas fa-file-alt"></i>&nbsp;Arquivos</h3>         
-                    <button class="btn btn-primary float-right mr-3" type="button" data-toggle="modal" data-target="#modalNovaRequisicao"><i class="fas fa-plus-circle"></i>&nbsp;Nova</button><hr> 
-
+                    <hr>
                     <!-- Abas -->
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Minhas Requisições</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Requisições Aceitas</a>
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Requisições Recebidas</a>                            
+                        </li>                            
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile2-tab" data-toggle="tab" href="#profile2" role="tab" aria-controls="profile2" aria-selected="false">Arquivos Compartilhados</a>                            
                         </li>                            
                     </ul> 
                      
@@ -93,6 +95,7 @@
                     <div class="tab-content" id="myTabContent">                                      
         
                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <button class="btn btn-primary ml-1 mt-2 mb-2" type="button" data-toggle="modal" data-target="#modalNovaRequisicao"><i class="fas fa-plus-circle"></i>&nbsp;Nova Requisição</button>
                             <table class="table table-sm table-hover text-center tblEmailEntrada" id="tblCaixaEntrada">
                                 <thead>
                                     <tr class="text-dark bg-light">
@@ -136,7 +139,32 @@
                                     
                                 </tbody>    
                             </table>                
-                        </div> 
+                        </div>
+
+                        <div class="tab-pane fade" id="profile2" role="tabpanel" aria-labelledby="profile2-tab">  
+                            <button class="btn btn-primary ml-1 mt-2 mb-2" type="button" data-toggle="modal" data-target="#modalNovoCompartilhamento"><i class="fas fa-plus-circle"></i>&nbsp;Novo Compartilhamento</button>
+                            <table class="table table-sm table-hover text-center tblEmailEntrada" id="tblCaixaEntrada">
+                                <thead>
+                                <tr class="text-dark bg-light">
+                                        <th scope="col">Nome</th>                                        
+                                        <th scope="col">Descrição</th>
+                                        <th scope="col">Tipo</th>
+                                        <th scope="col">Tamanho</th>
+                                        <th scope="col">Usuário</th>
+                                        <th scope="col">Data</th>
+                                    </tr>
+                                </thead>
+                                <tbody>                               
+                                    <!--<tr class="text-primary" data-target="#modalLerEmail" data-toggle="modal" style="cursor:pointer" id="XXX">
+                                        <th scope="row">1</th>
+                                        <td>Mark</td>
+                                        <td>Assunto Recebido 01</td>
+                                        <td>22/08/2018</td>
+                                    </tr>-->
+                                    
+                                </tbody>    
+                            </table>                
+                        </div>  
 
                     </div> <!-- Fim Conteúdo das Abas -->
                 </div>                 
@@ -158,25 +186,25 @@
                         <small id="emailHelp" class="form-text text-muted">Escolha o usuário, extensão, tamanho maxímo e o prazo de entrega do arquivo.</small><hr>  
                         <form class="" id="formRequisitar">
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Usuário</label>
+                                <label for="exampleInputPassword1" class="font-weight-bold">Usuário</label>
                                 <input type="search" class="form-control" id="pesquisaUsuarioArquivo" placeholder="Pesquisar usuário" required>   
                             </div>
                             <div class="form-group">
-                                <label for="descricaoArquivo">Descrição</label>
+                                <label for="descricaoArquivo" class="font-weight-bold">Descrição</label>
                                 <textarea type="text" class="form-control" id="descricaoArquivo" placeholder="Descrição" style="resize:none" required></textarea>   
                             </div>    
-                            <label for="exampleInputEmail1">Extensão do Arquivo</label>
+                            <label for="exampleInputEmail1" class="font-weight-bold">Extensão do Arquivo</label>
                             <select class="form-control mb-3" id="selectFormato">
                                 <option>Selecione</option>
-                                <option>.DOCX</option>
-                                <option>.JPEG</option>
-                                <option>.PDF</option>
-                                <option>.TXT</option>
-                                <option>.XLSX</option>
+                                <option>DOCX</option>
+                                <option>JPEG</option>
+                                <option>PDF</option>
+                                <option>TXT</option>
+                                <option>XLSX</option>
                             </select>
                             
                             <div class="form-group">
-                                <label for="exampleInputTamanho">Tamanho Maxímo do Arquivo</label><br>                       
+                                <label for="exampleInputTamanho" class="font-weight-bold">Tamanho Maxímo do Arquivo</label><br>                       
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="inlineRadioOptions" id="radio1mb" value="1mb">
                                     <label class="form-check-label" for="inlineRadio1">1 MB</label>
@@ -194,7 +222,7 @@
                                     <label class="form-check-label" for="inlineRadio1">10 MB</label>
                                 </div>
                                 <div class="form-group">
-                                <label for="prazo">Prazo para Entraga</label>
+                                <label for="prazo" class="font-weight-bold">Prazo para Entraga</label>
                                     <input class="form-control" name="prazo" id="prazo" type="date">
                                 </div>
                                 <hr>                                
@@ -210,6 +238,54 @@
                     </div>
                 </div>
             </div> <!-- Fim Modal Nova Requisição -->
+
+            <!-- Modal Novo Compartilhamento -->
+            <div class="modal fade" id="modalNovoCompartilhamento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel"><span class="text-primary"><i class="fas fa-file-alt"></i></span>&nbsp;Novo Compartilhamento de Arquivo</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                           
+                        <small id="emailHelp" class="form-text text-muted">Escolha o arquivo e a extensão, obs: tamanho maxímo 10MB</small><hr>  
+                        <form class="" id="formCompartilhar" method="post" action="../php/funcoes.php" enctype="multipart/form-data">
+                            <input type="hidden" name="funcao" value="upload">
+                            <div class="form-group">
+                                <label for="exampleInputArquivo" class="font-weight-bold">Aquivo</label>
+                                <input type="file" class="form-control" id="arquivo" name="arquivo" placeholder="Arquivo" required>   
+                            </div>
+                            <div class="form-group">
+                                <label for="descricaoArquivo" class="font-weight-bold">Descrição</label>
+                                <textarea type="text" class="form-control" id="descricaoArquivo" name="descricaoArquivo" placeholder="Descrição" style="resize:none" required></textarea>   
+                            </div>    
+                            <label for="exampleInputEmail1" class="font-weight-bold">Extensão do Arquivo</label>
+                            <select class="form-control mb-3" id="selectExtensao" name="selectExtensao">
+                                <option>Selecione</option>
+                                <option value="1">DOCX</option>
+                                <option value="2">JPEG</option>
+                                <option value="3">PDF</option>
+                                <option value="4">TXT</option>
+                                <option value="5">XLSX</option>
+                            </select>                      
+                            
+                               <!-- <div class="modal-footer"> -->
+                                <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button> -->
+                                <!-- <button type="submit" class="btn btn-primary mt-3" id="btnCompartilhar"><i class="fas fa-share-alt-square"></i>&nbsp;Compartilhar</button> -->
+                               <!-- </div> -->
+                               <!-- </div>         -->
+                        </form>  
+                            <div class="modal-footer">
+                                <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button> -->
+                                <button type="button" class="btn btn-primary mt-3" id="btnCompartilhar"><i class="fas fa-share-alt-square"></i>&nbsp;Compartilhar</button>
+                            </div>                                  
+                            
+                    </div>
+                </div>
+            </div> <!-- Fim Modal Novo Compartilhamento -->
 
         </div> <!-- Fim Container -->
 

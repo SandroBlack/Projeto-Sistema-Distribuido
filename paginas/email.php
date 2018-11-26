@@ -154,18 +154,18 @@
                             <div class="modal-body">
                                 <form class="" id="formNovoEmail">
                                     <div class="form-group" id="novoEmailGrupo">
-                                        <label for="exampleInputPara">Para:</label>                
+                                        <label for="exampleInputPara" class="font-weight-bold">Para:</label>                
                                         <input type="text" class="form-control" name="novoEmailPara" id="novoEmailPara" placeholder="Para" required>                                       
                                         <!-- <select class="custom-select" name="novoEmailPara" id="novoEmailPara">
                                             <option value=""></option>
                                         </select>        -->
                                     </div>
                                     <div class="form-group">
-                                            <label for="exampleInputAssunto">Assunto:</label>                
+                                            <label for="exampleInputAssunto" class="font-weight-bold">Assunto:</label>                
                                         <input type="text" class="form-control" name="novoEmailAssunto" id="novoEmailAssunto" aria-describedby="Assunto" placeholder="Assunto" required></textarea>          
                                     </div>
                                     <div class="form-group">
-                                            <label for="exampleInputTextarea">Mensagem:</label>                
+                                            <label for="exampleInputTextarea" class="font-weight-bold">Mensagem:</label>                
                                         <textarea class="form-control" name="novoEmailMensagem" id="novoEmailMensagem" style="resize:none" aria-describedby="Mensagem" placeholder="Mensagem" rows="5" required></textarea>          
                                     </div>
                                 </form>                                        

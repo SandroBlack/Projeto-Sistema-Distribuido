@@ -37,6 +37,9 @@ switch($funcao){
 	case "pesquisarUser":
 		pesquisarUser();
 		break;
+	case "upload":
+		uploadArquivo();
+		break;	
 }
 
 
@@ -170,7 +173,7 @@ function cadastrar(){
 	}
 }
 
-/* ENVIO DE EMAILS */
+/* PÁGINA DE EMAILS */
 
 // Pesquisar Usuários Cadastrados
 function pesquisarUser(){
@@ -402,5 +405,35 @@ function emailRecuperaSenha() {
         echo "<script>location.href='http://www.sandroteck.zz.vc/?pagina=recuperarSenha'</script>";
     } catch (Exception $erro) {
         echo "Erro: " . $erro->getMessage() . "<br>";
-    }
+	}
+}
+
+// PÁGINA DE ARQUIVO
+function uploadArquivo(){
+	$arquivo = $_FILES["arquivo"];
+	$nome = $arquivo["name"];
+	$tipo = strtolower(substr($nome, -4));
+	$extensao = str_replace(".", "", $tipo);
+	$tamanho = ceil($arquivo["size"] / 1024);
+	$descricao = $_POST["descricaoArquivo"];
+	$caminho  = "../uploads/";		
+	
+	move_uploaded_file($_FILES["arquivo"]["tmp_name"], $caminho . $_FILES["arquivo"]["name"]);
+    print_r($arquivo);
+	
+	try{
+		$pdo = conectar();
+		$sql = "INSERT INTO arquivo(nome, descricao, tipo, tamanho, caminho, fk_usuario_arquivo)
+				VALUES(:nome, :descricao, :tipo, :tamanho, :caminho, :usuario_arquivo";
+		$stm = $pdo->prepare($sql);
+		$stm->bindValue(":nome", $nome);		
+		$stm->bindValue(":descricao", $descricao);		
+		$stm->bindValue(":tipo", $extensao);		
+		$stm->bindValue(":tamanho", $tamanho);		
+		$stm->bindValue(":caminho", $caminho);			
+		$stm->bindValue(":usuario_arquivo", $_SESSION["idUsuario"]);			
+		$stm->execute();	
+	} catch(PDOException $erro){
+		echo "Erro: " . $erro->getMessage() . "<br>";
+	}
 }

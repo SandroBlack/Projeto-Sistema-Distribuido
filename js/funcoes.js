@@ -326,5 +326,10 @@ $(document).ready(function(){
         });      
     });	
 
+    /* PÁGINA ARQUIVOS */
+    $('#btnCompartilhar').click(function(){
+        $('#formCompartilhar').submit();
+        
+    });
 		
 });		
