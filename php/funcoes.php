@@ -424,7 +424,7 @@ function uploadArquivo(){
 	try{
 		$pdo = conectar();
 		$sql = "INSERT INTO arquivo(nome, descricao, tipo, tamanho, caminho, fk_usuario_arquivo)
-				VALUES(:nome, :descricao, :tipo, :tamanho, :caminho, :usuario_arquivo";
+				VALUES(:nome, :descricao, :tipo, :tamanho, :caminho, :usuario_arquivo)";
 		$stm = $pdo->prepare($sql);
 		$stm->bindValue(":nome", $nome);		
 		$stm->bindValue(":descricao", $descricao);		
