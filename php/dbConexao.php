@@ -8,10 +8,10 @@ function conectar(){
 	$pwd = "";*/
 	
 	// Conexão Heroku
-	$host = "ec2-174-129-18-98.compute-1.amazonaws.com";
-	$banco = "de5vh30tv8uv76";
-	$usr = "lenriksyouqcls";
-	$pwd = "bdfedd1a65546befe6d385202f0440e735b31f6f9ca6cd684c3899c97aefefeb";
+	$host = "ec2-18-235-76-106.compute-1.amazonaws.com";
+	$banco = "d5vcfecbt898jg";
+	$usr = "ojnwzceniwjvuf";
+	$pwd = "e6678550b8956d38de9371000772f90e75811136efacb79e05fa99e2907b55f7";
 	
 	try{
 		//$conn = new PDO("mysql:host=".$host. ";dbname=" .$banco, $usr, $pwd); //<- Mysql Localhost
