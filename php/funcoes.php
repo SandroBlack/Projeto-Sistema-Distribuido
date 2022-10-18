@@ -130,7 +130,7 @@ function cadastrar(){
 	$email   = $dados["emailCadastro"];
 	$senha   = $dados["senhaCadastro"];	
 	$reSenha = $dados["reSenhaCadastro"];	
-	$situacao = 1; //true; // Depois que a função de envio de e-mail de confirmação estiver pronta, essa linha deve ser removida.	
+	$situacao = true; // Depois que a função de envio de e-mail de confirmação estiver pronta, essa linha deve ser removida.	
 	
 	if (empty($nome) || empty($sexo) || empty($email) || empty($senha) || empty($reSenha)){
 		
